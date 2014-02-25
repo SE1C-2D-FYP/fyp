@@ -61,8 +61,6 @@ $(function() {
                         console.log(evt.type);
                     } // event
                 });
-
-                
             },
             dataType: "json"
         });

@@ -23,11 +23,12 @@
         <link href="css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
         <!-- fullCalendar -->
         <link href="css/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css" />
+        <link href="css/fullcalendar/fullcalendar.print.css" rel="stylesheet" type="text/css" media='print' />
         <!-- Daterange picker -->
         <link href="css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
         <!-- bootstrap wysihtml5 - text editor -->
         <link href="css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
-        
+
         <!-- Theme style -->
         <link href="css/styles.css" rel="stylesheet" type="text/css" />
 
@@ -70,7 +71,7 @@
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <script type="text/javascript" src="js/jquery.dialogextend.js"></script>
 
-        
+
         <script>
             $(function() {
                 function openDialog(id, title) {
@@ -144,12 +145,17 @@
                 $('#profit').click(function() {
                     openDialog($('#dialog_salesReport_profit'), "Profit Made");
                 });
+
+                $('#open_calendar').click(function() {
+                    openDialog($('#dialog_calendar'), "Calenar");
+                });
             });
         </script>
-        
+
         <!-- Function JS -->
         <script src="js/function/noOfSales.js" type="text/javascript"></script>
-        
+        <script src="js/function/calendar.js" type="text/javascript"></script>
+
     </head>
     <body class="skin-black">
         <!-- header logo: style can be found in header.less -->
@@ -486,7 +492,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#" id="open_calendar">
                                 <i class="fa fa-calendar"></i> <span>Calendar</span>
                                 <small class="badge pull-right bg-red">3</small>
                             </a>
@@ -526,6 +532,30 @@
                     <div class="row">
                         <div class="col-xs-12 connectedSortable">
                             <button id="demo" class="btn btn-primary">asd</button>
+
+                            <!-- Button trigger modal -->
+                            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                                Launch demo modal
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            ...
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div><!-- /.col -->
                     </div>
                     <!-- /.row -->
@@ -533,6 +563,7 @@
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
 
+        <!-- dialog of each function -->
         <div id="dialog_1" hidden="">
             <form><p>name:</p><input type="text"/><input type="submit" name="submit" value="submit"/></form>
         </div>
@@ -553,12 +584,35 @@
         </div>
 
         <div id="dialog_salesReport_geographicalSales" hidden="">
-
         </div>
 
         <div id="dialog_salesReport_profit" hidden="">
+        </div>
 
-        </div>        
         <!-- add new calendar event modal -->
+        <div class="box box-warning" id="dialog_calendar" hidden="">
+            <div class="box-header">
+                <i class="fa fa-calendar"></i>
+                <div class="box-title">Calendar</div>
+
+                <!-- tools box -->
+                <div class="pull-right box-tools">
+                    <!-- button with a dropdown -->
+                    <div class="btn-group">
+                        <button class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li><a href="#">Add new event</a></li>
+                            <li><a href="#">Clear events</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">View calendar</a></li>
+                        </ul>
+                    </div>
+                </div><!-- /. tools -->                                    
+            </div><!-- /.box-header -->
+            <div class="box-body no-padding">
+                <!--The calendar -->
+                <div id="calendar" style="height: 300px"></div>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
     </body>
 </html>
