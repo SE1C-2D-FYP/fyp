@@ -10,9 +10,7 @@ $(function() {
         $.ajax({
             url: "salesReportController",
             data: {chartType: "noOfSales"},
-            success: function(data) {
-                var bar = new Morris.Bar(data);
-                
+            success: function(data) {            
                 $('#dialog_salesReport_noOfSales').dialog({
                     "title": "Number of Sales",
                     "width": "450px",
@@ -36,7 +34,7 @@ $(function() {
                         "collapse": "ui-icon-triangle-1-s",
                         "restore": "ui-icon-newwin"},
                     "load": function(evt, dlg) {
-                        console.log(evt.type);
+                        var bar = new Morris.Bar(data);
                     }, // event
                     "beforeCollapse": function(evt, dlg) {
                         console.log(evt.type);

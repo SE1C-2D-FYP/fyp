@@ -541,8 +541,8 @@
             <p>...</p>
         </div>
 
-        <div id="dialog_salesReport_noOfSales"  style="height: 300px;width: 400px;">
-            <div class="box box-success">
+        <div id="dialog_salesReport_noOfSales" style="display:none;">
+            <div class="box box-success" >
                 <div class="box-header">
                     <h3 class="box-title">Bar Chart</h3>
                 </div>
