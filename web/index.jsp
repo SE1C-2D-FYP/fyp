@@ -224,14 +224,14 @@
                                 <span>Client</span>
                             </a>
                         </li>
-                        
+
                         <li>
                             <a href="#" id="open_calendar">
                                 <i class="glyphicon glyphicon-calendar"></i>
                                 <span>Calendar</span>
                             </a>
                         </li>
-                        
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-file-text"></i>
@@ -504,7 +504,7 @@
                     <!-- /.search form -->
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                        
+
                     </ul>
                 </section>
                 <!-- /.sidebar -->
@@ -518,25 +518,6 @@
                     <!-- top row -->
                     <div class="row">
                         <div class="col-xs-12">
-                            
-                            <!-- Modal -->
-                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            ...
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div><!-- /.col -->
                     </div>
                     <!-- /.row -->
@@ -544,42 +525,40 @@
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
 
-        <!-- dialog of each function -->
+        <!-- add new dialog / event modal -->
+        
+        <!-- Dialog -->
+        <jsp:include page="noOfSales.jsp" />
+        <jsp:include page="calendar.jsp" />
+
         <div id="dialog_profile" hidden="">
             <p>Hi , I am Hong</p>
         </div>
-        <jsp:include page="noOfSales.jsp" />
 
         <div id="dialog_salesReport_geographicalSales" hidden="">
         </div>
 
         <div id="dialog_salesReport_profit" hidden="">
+
         </div>
 
-        <!-- add new calendar event modal -->
-        <div class="box box-warning" id="dialog_calendar" hidden="">
-            <div class="box-header">
-                <i class="fa fa-calendar"></i>
-                <div class="box-title">Calendar</div>
-
-                <!-- tools box -->
-                <div class="pull-right box-tools">
-                    <!-- button with a dropdown -->
-                    <div class="btn-group">
-                        <button class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></button>
-                        <ul class="dropdown-menu pull-right" role="menu">
-                            <li><a href="#">Add new event</a></li>
-                            <li><a href="#">Clear events</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">View calendar</a></li>
-                        </ul>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
                     </div>
-                </div><!-- /. tools -->                                    
-            </div><!-- /.box-header -->
-            <div class="box-body no-padding">
-                <!--The calendar -->
-                <div id="calendar" style="height: 300px"></div>
-            </div><!-- /.box-body -->
-        </div><!-- /.box -->
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div><!-- ./modal -->
     </body>
 </html>
