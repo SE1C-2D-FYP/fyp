@@ -147,10 +147,6 @@
                     });
                 }
 
-                $('#demo').click(function() {
-                    openDialog($('#dialog_1'), "dialog1");
-                });
-
                 $('#profile').click(function() {
                     openDialog($('#dialog_profile'), "Profile");
                 });
@@ -222,6 +218,33 @@
                 </a>
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-users"></i>
+                                <span>Client</span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="#" id="open_calendar">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                                <span>Calendar</span>
+                            </a>
+                        </li>
+                        
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-file-text"></i>
+                                <span>Report</span>
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" id="noOfSales">Number of Sales</a></li>
+                                <li><a href="#" id="geographicalSales">Geographical Sales</a></li>
+                                <li><a href="#" id="profit">Profit</a></li>
+                            </ul>
+                        </li>
+
                         <!-- Messages: style can be found in dropdown.less-->
                         <li class="dropdown messages-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -251,7 +274,7 @@
                                                     <img src="img/avatar2.png" class="img-circle" alt="user image"/>
                                                 </div>
                                                 <h4>
-                                                    AdminLTE Design Team
+                                                    Design Team
                                                     <small><i class="fa fa-clock-o"></i> 2 hours</small>
                                                 </h4>
                                                 <p>Why not buy a new awesome theme?</p>
@@ -415,14 +438,14 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span>Jane Doe <i class="caret"></i></span>
+                                <span>Hong<i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-black">
                                     <img src="img/Jane.png" class="img-circle" alt="User Image" />
                                     <p>
-                                        Jane Doe - Web Developer
+                                        Hong - Developer
                                         <small>Member since Nov. 2012</small>
                                     </p>
                                 </li>
@@ -464,7 +487,7 @@
                             <img src="img/Jane.png" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
-                            <p>Hello, Jane</p>
+                            <p>Hello, Hong</p>
 
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
@@ -481,90 +504,7 @@
                     <!-- /.search form -->
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                        <li class="active">
-                            <a href="index.jsp">
-                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-th"></i> <span>Widgets</span> <small class="badge pull-right bg-green">new</small>
-                            </a>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-bar-chart-o"></i>
-                                <span>Charts</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="#" id="noOfSales"><i class="fa fa-angle-double-right"></i> Number of Sales</a></li>
-                                <li><a href="#" id="geographicalSales"><i class="fa fa-angle-double-right"></i> Geographical of Sales</a></li>
-                                <li><a href="#" id="profit"><i class="fa fa-angle-double-right"></i> Profit Made</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-laptop"></i>
-                                <span>UI Elements</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i> General</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Icons</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Buttons</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Sliders</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Timeline</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-edit"></i> <span>Forms</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i> General Elements</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Advanced Elements</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Editors</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-table"></i> <span>Tables</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Simple tables</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Data tables</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#" id="open_calendar">
-                                <i class="fa fa-calendar"></i> <span>Calendar</span>
-                                <small class="badge pull-right bg-red">3</small>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-envelope"></i> <span>Mailbox</span>
-                                <small class="badge pull-right bg-yellow">12</small>
-                            </a>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-folder"></i> <span>Examples</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Invoice</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Login</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Register</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Lockscreen</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i> 404 Error</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i> 500 Error</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Blank Page</a></li>
-                            </ul>
-                        </li>
+                        
                     </ul>
                 </section>
                 <!-- /.sidebar -->
@@ -577,14 +517,8 @@
                 <section class="content">
                     <!-- top row -->
                     <div class="row">
-                        <div class="col-xs-12 confnectedSortable">
-                            <button id="demo" class="btn btn-primary">asd</button>
-
-                            <!-- Button trigger modal -->
-                            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                                Launch demo modal
-                            </button>
-
+                        <div class="col-xs-12">
+                            
                             <!-- Modal -->
                             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -611,12 +545,8 @@
         </div><!-- ./wrapper -->
 
         <!-- dialog of each function -->
-        <div id="dialog_1" hidden="">
-            <form><p>name:</p><input type="text"/><input type="submit" name="submit" value="submit"/></form>
-        </div>
-
         <div id="dialog_profile" hidden="">
-            <p>...</p>
+            <p>Hi , I am Hong</p>
         </div>
         <jsp:include page="noOfSales.jsp" />
 
