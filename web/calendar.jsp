@@ -14,7 +14,7 @@
             <div class="btn-group">
                 <button class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></button>
                 <ul class="dropdown-menu pull-right" role="menu">
-                    <li><a href="#">Add new event</a></li>
+                    <li><a href="#" >Add new event</a></li>
                     <li><a href="#">Clear events</a></li>
                     <li class="divider"></li>
                     <li><a href="#">View calendar</a></li>
