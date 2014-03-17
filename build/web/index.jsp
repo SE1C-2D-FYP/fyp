@@ -84,12 +84,65 @@
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <script type="text/javascript" src="js/jquery.dialogextend.js"></script>
 
+        
         <script>
             $(function() {
+                //init
                 Messenger.options = {
                     extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-right',
                     theme: 'future'
-                }
+                };
+
+                $("[data-toggle='offcanvas']").click();
+
+                var notiMsg;
+                notiMsg = Messenger().post({
+                    message: "You have 9 tasks uncomplete.",
+                    type: "info",
+                    actions: {
+                        open: {
+                            label: 'open',
+                            action: function() {
+                                $('#notification').click();
+                                notiMsg.cancel();
+                            }
+                        },
+                        cancel: {
+                            label: 'cancel',
+                            action: function() {
+                                return notiMsg.cancel();
+                            }
+                        }
+                    }
+                });
+                
+                var msg;
+                msg = Messenger().post({
+                    message: "You have 5 messengers uncomplete.",
+                    type: "info",
+                    actions: {
+                        open: {
+                            label: 'open',
+                            action: function() {
+                                $('#msg').click();
+                                msg.cancel();
+                            }
+                        },
+                        cancel: {
+                            label: 'cancel',
+                            action: function() {
+                                return msg.cancel();
+                            }
+                        }
+                    }
+                });
+
+                Messenger().post({
+                    message: "<h4>Welcome hong!</h4>",
+                    type: "info",
+                    showCloseButton: true
+                });
+
 
                 function openDialog(id, title) {
                     id.dialog({
@@ -247,7 +300,7 @@
 
                         <!-- Messages: style can be found in dropdown.less-->
                         <li class="dropdown messages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="msg">
                                 <i class="fa fa-envelope"></i>
                                 <span class="label label-success">5</span>
                             </a>
@@ -322,8 +375,8 @@
                             </ul>
                         </li>
                         <!-- Notifications: style can be found in dropdown.less -->
-                        <li class="dropdown notifications-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <li class="dropdown notifications-menu" >
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="notification">
                                 <i class="fa fa-warning"></i>
                                 <span class="label label-warning">10</span>
                             </a>
@@ -451,14 +504,8 @@
                                 </li>
                                 <!-- Menu Body -->
                                 <li class="user-body">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
+                                    <div class="col-xs-12 text-center">
                                         <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
                                     </div>
                                 </li>
                                 <!-- Menu Footer-->
@@ -518,6 +565,24 @@
                     <!-- top row -->
                     <div class="row">
                         <div class="col-xs-12">
+                            <div id="container">Try to change your xml data to update this content</div>
+                            <script src="socket.io/socket.io.js"></script>
+                            <script>
+                                // creating a new websocket
+                                var socket = io.connect('http://localhost:8000');
+                                socket.on('connect',function(){
+                                    console.log("connected nodejs");
+                                });
+                                // on every message recived we print the new datas inside the #container div
+                                socket.on('notification', function (data) {
+                                    // convert the json string into a valid javascript object
+                                    
+                                    var _data = JSON.parse(data);
+                                    console.log(_data);
+                                    $('#container').html(_data.test.sample);
+                                //$('time').html('Last Update:' + _data.time);
+                            });
+                            </script>
                         </div><!-- /.col -->
                     </div>
                     <!-- /.row -->
@@ -526,7 +591,7 @@
         </div><!-- ./wrapper -->
 
         <!-- add new dialog / event modal -->
-        
+
         <!-- Dialog -->
         <jsp:include page="noOfSales.jsp" />
         <jsp:include page="calendar.jsp" />
@@ -548,10 +613,10 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
                     </div>
                     <div class="modal-body">
-                        ...
+                        Some Event.
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
