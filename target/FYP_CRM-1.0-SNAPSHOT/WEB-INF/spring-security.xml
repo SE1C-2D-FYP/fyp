@@ -1,0 +1,28 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+        <!--<global-method-security pre-post-annotations="enabled" />-->
+    <http pattern="/static/**" security="none" />
+	<http use-expressions="true" auto-config="true">
+            <intercept-url pattern="/login*" access="isAnonymous()" />
+            <intercept-url pattern="/**" access="hasRole('ACCOUNT MANAGER')" />
+                
+                <form-login login-processing-url="/j_spring_security_check"
+                            login-page="/login" default-target-url="/index"
+                            authentication-failure-url="/login"/>
+                <logout invalidate-session="true" logout-url="/logout" />
+                <remember-me services-ref="rememberMeServices" key="rememberMeFunction"/>
+                <!--<access-denied-handler error-page="activity"/>-->
+	</http>
+
+        <!--<bean id="a" class="com.crm.daoImpl.ActivityNoteDaoImpl"></bean>-->
+        
+	<authentication-manager alias="authenticationManager">
+	  <authentication-provider ref="daoAuthenticationProvider" />
+	</authentication-manager>
+ 
+</beans:beans>

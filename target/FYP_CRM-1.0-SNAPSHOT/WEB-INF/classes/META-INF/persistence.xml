@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="com.crm_FYP_CRM_war_1.0-SNAPSHOTPU" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <jta-data-source>fyp</jta-data-source>
+    <class>com.crm.models.Transaction</class>
+    <class>com.crm.models.ActivityNote</class>
+    <class>com.crm.models.Region</class>
+    <class>com.crm.models.Unit</class>
+    <class>com.crm.models.Employee</class>
+    <class>com.crm.models.Orientation</class>
+    <class>com.crm.models.Department</class>
+    <class>com.crm.models.UnitView</class>
+    <class>com.crm.models.District</class>
+    <class>com.crm.models.ContactInfo</class>
+    <class>com.crm.models.CompanyClient</class>
+    <class>com.crm.models.StockViewing</class>
+    <class>com.crm.models.Title</class>
+    <class>com.crm.models.Stock</class>
+    <class>com.crm.models.Client</class>
+    <class>com.crm.models.Building</class>
+    <class>com.crm.models.Estate</class>
+    <class>com.crm.models.ContactNote</class>
+    <class>com.crm.models.PersonalClient</class>
+    <class>com.crm.models.Account</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties/>
+  </persistence-unit>
+</persistence>

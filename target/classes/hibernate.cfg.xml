@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
+    <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+    <property name="hibernate.connection.url">jdbc:oracle:thin:@tyt06326.no-ip.org:1521:XE</property>
+    <property name="hibernate.connection.username">fyp</property>
+    <property name="hibernate.connection.password">fyp</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
+    <mapping class="com.crm.models.Account"/>
+    <mapping class="com.crm.models.ActivityNote"/>
+    <mapping class="com.crm.models.Building"/>
+    <mapping class="com.crm.models.Client"/>
+    <mapping class="com.crm.models.CompanyClient"/>
+    <mapping class="com.crm.models.ContactInfo"/>
+    <mapping class="com.crm.models.ContactNote"/>
+    <mapping class="com.crm.models.Department"/>
+    <mapping class="com.crm.models.District"/>
+    <mapping class="com.crm.models.Employee"/>
+    <mapping class="com.crm.models.Estate"/>
+    <mapping class="com.crm.models.Orientation"/>
+    <mapping class="com.crm.models.PersonalClient"/>
+    <mapping class="com.crm.models.Region"/>
+    <mapping class="com.crm.models.Stock"/>
+    <mapping class="com.crm.models.StockViewing"/>
+    <mapping class="com.crm.models.Title"/>
+    <mapping class="com.crm.models.Transaction"/>
+    <mapping class="com.crm.models.Unit"/>
+    <mapping class="com.crm.models.UnitView"/>
+  </session-factory>
+</hibernate-configuration>
