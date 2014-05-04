@@ -46,7 +46,6 @@ public class Chart {
         } catch (Exception e) {
             jsonString = "error";
         }
-        System.out.println(jsonString);
         session.close();
         return jsonString;
     }

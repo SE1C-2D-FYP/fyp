@@ -5,15 +5,15 @@
 
         <div class="box-body no-padding">
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#home" data-toggle="tab">Activity</a></li>
-                <li><a href="#profile" data-toggle="tab">Calendar</a></li>
+            <ul class="nav nav-tabs" id="activity_tab">
+                <li class="active"><a href="#activity_panel" data-toggle="tab">Activity</a></li>
+                <li><a href="#calendar_panel" data-toggle="tab">Calendar</a></li>
 
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
-                <div class="tab-pane active" id="home">
+                <div class="tab-pane active" id="activity_panel">
                     <div class="container-fluid activity">
                         <div class="row">
 
@@ -55,9 +55,13 @@
                     </div>
                 </div>
 
-                <div class="tab-pane" id="profile">
+                <div class="tab-pane" id="calendar_panel">
                     <div>
-                        calendar
+                        <div id="calendar_calendar_panel">
+                            <script>
+                                        $('#calendar_calendar_panel').fullCalendar('render');
+                                </script>
+                        </div>
                     </div>
                 </div>
 
