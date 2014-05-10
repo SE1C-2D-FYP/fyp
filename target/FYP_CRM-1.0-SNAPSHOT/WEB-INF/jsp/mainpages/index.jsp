@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
+        <title>Midland CRM System</title>
 
         <!-- bootstrap 3.0.2 -->
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -47,14 +47,15 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
-        
+
+        <!-- DataTable css-->
         <style type="text/css" title="currentStyle">
-        @import "css/datatables/dataTables.bootstrap.css";
-        @import "css/form.css";
-        @import "css/fieldset.css";
-        @import "css/datatables/dataTables.bootstrap.css";
+            @import "css/datatables/dataTables.bootstrap.css";
+            @import "css/form.css";
+            @import "css/fieldset.css";
+            @import "css/datatables/dataTables.bootstrap.css";
         </style>
-        
+
         <script src="js/jquery-ui-1.10.4.custom/js/jquery-1.10.2.js"></script>
 
         <!-- jQuery 2.0.2 -->
@@ -97,178 +98,195 @@
 
         <script src="js/date.js"></script>
         <link rel="stylesheet" href="css/site.css">
-        <script src="js/activity/activity.js"></script>
-         bootbox code 
+        <!-- bootbox code -->
         <script src="js/bootbox.min.js"></script>
+        <!-- DataTable code-->
         <script src="js/DataTable/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="js/DataTable/jquery.dataTables.js" type="text/javascript"></script>
+        <!-- Google Chart API-->
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <script type="text/javascript" src="js/Client/client.js"></script>
-        <script type="text/javascript" src="js/marioizquierdo-jquery.serializeJSON-6f7f574/jquery.serializejson.min.js"
-
+        <script type="text/javascript" src="js/marioizquierdo-jquery.serializeJSON-6f7f574/jquery.serializejson.min.js"></script>
+        <!-- jsPDF-->
+        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.js"></script>
+        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.plugin.addimage.js"></script>
+        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.plugin.autoprint.js"></script>
+        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.plugin.split_text_to_size.js"></script>
+        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.plugin.total_pages.js"></script>
+        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.plugin.png_support.js"></script>
+        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.plugin.addhtml.js"></script>
+        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.plugin.from_html.js"></script>
+        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.plugin.standard_fonts_metrics.js"></script>
+        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.plugin.cell.js"></script>
+        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/libs/png_support/png.js"></script>
+        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/libs/png_support/zlib.js"></script>
+        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/libs/FileSaver.js/FileSaver.min.js"></script>
+        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/libs/Deflate/adler32cs.js"></script>
+        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/libs/Deflate/deflate.js"></script>
+        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/html2canvas.js"></script>
         <!-- Function JS -->
         <script src="js/function/personalSalesReport.js" type="text/javascript"></script>
         <script src="js/function/teamSalesReport.js" type="text/javascript"></script>
         <script src="js/function/teamMemberSalesReport.js" type="text/javascript"></script>
         <script src="js/function/calendar.js" type="text/javascript"></script>
+        <script src="js/Client/client.js" type="text/javascript"></script>
+        <script src="js/activity/activity.js" type="text/javascript"></script>
         <script>
             $(function() {
-    //init
-    Messenger.options = {
-        extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-right',
-        theme: 'future'
-    };
+                //init
+                Messenger.options = {
+                    extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-right',
+                    theme: 'future'
+                };
 
-    $("[data-toggle='offcanvas']").click();
+                $("[data-toggle='offcanvas']").click();
 
-    var notiMsg;
-    notiMsg = Messenger().post({
-        message: "You have 9 tasks uncomplete.",
-        type: "info",
-        actions: {
-            open: {
-                label: 'open',
-                action: function() {
-                    $('#notification').click();
-                    notiMsg.cancel();
-                }
-            },
-            cancel: {
-                label: 'cancel',
-                action: function() {
-                    return notiMsg.cancel();
-                }
-            }
-        }
-    });
-
-    var msg;
-    msg = Messenger().post({
-        message: "You have 5 messengers uncomplete.",
-        type: "info",
-        actions: {
-            open: {
-                label: 'open',
-                action: function() {
-                    $('#msg').click();
-                    msg.cancel();
-                }
-            },
-            cancel: {
-                label: 'cancel',
-                action: function() {
-                    return msg.cancel();
-                }
-            }
-        }
-    });
-
-    Messenger().post({
-        message: "<h4>Welcome <%=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getFirstName()%>!</h4>",
-        type: "info",
-        showCloseButton: true
-    });
-
-
-    function openDialog(id, title) {
-        id.dialog({
-            "title": title,
-            "width": "auto",
-            "buttons": {
-                "OK": function() {
-                    $(this).dialog("close");
-                },
-                "cancel": function() {
-                    $(this).dialog("close");
-                }
-            }
-        }).dialogExtend({
-            "closable": true, // enable/disable close button
-            "maximizable": true, // enable/disable maximize button
-            "minimizable": true, // enable/disable minimize button
-            "collapsable": true, // enable/disable collapse button
-            "dblclick": "collapse", // set action on double click. false, 'maximize', 'minimize', 'collapse'
-            "titlebar": "transparent", // false, 'none', 'transparent'
-            "minimizeLocation": "left", // sets alignment of minimized dialogues
-            "icons": {// jQuery UI icon class
-                "close": "ui-icon-closethick",
-                "maximize": "ui-icon-extlink",
-                "minimize": "ui-icon-minus",
-                "collapse": "ui-icon-triangle-1-s",
-                "restore": "ui-icon-newwin"},
-            "load": function(evt, dlg) {
-                console.log(evt.type);
-            }, // event
-            "beforeCollapse": function(evt, dlg) {
-                console.log(evt.type);
-            }, // event
-            "beforeMaximize": function(evt, dlg) {
-                console.log(evt.type);
-            }, // event
-            "beforeMinimize": function(evt, dlg) {
-                console.log(evt.type);
-            }, // event
-            "beforeRestore": function(evt, dlg) {
-                console.log(evt.type);
-            }, // event
-            "collapse": function(evt, dlg) {
-                console.log(evt.type);
-            }, // event
-            "maximize": function(evt, dlg) {
-                console.log(evt.type);
-            }, // event
-            "minimize": function(evt, dlg) {
-                console.log(evt.type);
-            }, // event
-            "restore": function(evt, dlg) {
-                console.log(evt.type);
-            } // event
-        });
-    }
-
-    $('#profile').click(function() {
-        openDialog($('#dialog_profile'), "Profile");
-    });
-
-    $('#open_calendar').click(function() {
-        openDialog($('#dialog_calendar'), "Calenar");
-        $('#calendar').fullCalendar('render');
-    });
-    $('#open_activity').click(function() {
-        openDialog($('#dialog_activity'), "Activity");
-    });
-    //typeahead
-    // instantiate the bloodhound suggestion engine
-    var numbers = new Bloodhound({
-        datumTokenizer: function(d) {
-            return Bloodhound.tokenizers.whitespace(d.num);
-        },
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        local: [
-            {num: 'one'},
-            {num: 'two'},
-            {num: 'three'},
-                            {num: 'four'},
-                            {num: 'five'},
-                            {num: 'six'},
-                            {num: 'seven'},
-                            {num: 'eight'},
-                            {num: 'nine'},
-                            {num: 'ten'}
-                        ]
-                    });
-
-                    // initialize the bloodhound suggestion engine
-                    numbers.initialize();
-
-                    // instantiate the typeahead UI
-                    $('#search').typeahead(null, {
-                        displayKey: 'num',
-                        source: numbers.ttAdapter()
-                    });
+                var notiMsg;
+                notiMsg = Messenger().post({
+                    message: "You have 9 tasks uncomplete.",
+                    type: "info",
+                    actions: {
+                        open: {
+                            label: 'open',
+                            action: function() {
+                                $('#notification').click();
+                                notiMsg.cancel();
+                            }
+                        },
+                        cancel: {
+                            label: 'cancel',
+                            action: function() {
+                                return notiMsg.cancel();
+                            }
+                        }
+                    }
                 });
-        </script>
 
+                var msg;
+                msg = Messenger().post({
+                    message: "You have 5 messengers uncomplete.",
+                    type: "info",
+                    actions: {
+                        open: {
+                            label: 'open',
+                            action: function() {
+                                $('#msg').click();
+                                msg.cancel();
+                            }
+                        },
+                        cancel: {
+                            label: 'cancel',
+                            action: function() {
+                                return msg.cancel();
+                            }
+                        }
+                    }
+                });
+
+                Messenger().post({
+                    message: "<h4>Welcome <%=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getFirstName()%>!</h4>",
+                    type: "info",
+                    showCloseButton: true
+                });
+
+
+                function openDialog(id, title) {
+                    id.dialog({
+                        "title": title,
+                        "width": "auto",
+                        "buttons": {
+                            "OK": function() {
+                                $(this).dialog("close");
+                            },
+                            "cancel": function() {
+                                $(this).dialog("close");
+                            }
+                        }
+                    }).dialogExtend({
+                        "closable": true, // enable/disable close button
+                        "maximizable": true, // enable/disable maximize button
+                        "minimizable": true, // enable/disable minimize button
+                        "collapsable": true, // enable/disable collapse button
+                        "dblclick": "collapse", // set action on double click. false, 'maximize', 'minimize', 'collapse'
+                        "titlebar": "transparent", // false, 'none', 'transparent'
+                        "minimizeLocation": "left", // sets alignment of minimized dialogues
+                        "icons": {// jQuery UI icon class
+                            "close": "ui-icon-closethick",
+                            "maximize": "ui-icon-extlink",
+                            "minimize": "ui-icon-minus",
+                            "collapse": "ui-icon-triangle-1-s",
+                            "restore": "ui-icon-newwin"},
+                        "load": function(evt, dlg) {
+                            console.log(evt.type);
+                        }, // event
+                        "beforeCollapse": function(evt, dlg) {
+                            console.log(evt.type);
+                        }, // event
+                        "beforeMaximize": function(evt, dlg) {
+                            console.log(evt.type);
+                        }, // event
+                        "beforeMinimize": function(evt, dlg) {
+                            console.log(evt.type);
+                        }, // event
+                        "beforeRestore": function(evt, dlg) {
+                            console.log(evt.type);
+                        }, // event
+                        "collapse": function(evt, dlg) {
+                            console.log(evt.type);
+                        }, // event
+                        "maximize": function(evt, dlg) {
+                            console.log(evt.type);
+                        }, // event
+                        "minimize": function(evt, dlg) {
+                            console.log(evt.type);
+                        }, // event
+                        "restore": function(evt, dlg) {
+                            console.log(evt.type);
+                        } // event
+                    });
+                }
+
+                $('#profile').click(function() {
+                    openDialog($('#dialog_profile'), "Profile");
+                });
+
+                $('#open_calendar').click(function() {
+                    openDialog($('#dialog_calendar'), "Calenar");
+                    $('#calendar').fullCalendar('render');
+                });
+                $('#open_activity').click(function() {
+                    openDialog($('#dialog_activity'), "Activity");
+                });
+                //typeahead
+                // instantiate the bloodhound suggestion engine
+                var numbers = new Bloodhound({
+                    datumTokenizer: function(d) {
+                        return Bloodhound.tokenizers.whitespace(d.num);
+                    },
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    local: [
+                        {num: 'one'},
+                        {num: 'two'},
+                        {num: 'three'},
+                        {num: 'four'},
+                        {num: 'five'},
+                        {num: 'six'},
+                        {num: 'seven'},
+                        {num: 'eight'},
+                        {num: 'nine'},
+                        {num: 'ten'}
+                    ]
+                });
+
+                // initialize the bloodhound suggestion engine
+                numbers.initialize();
+
+                // instantiate the typeahead UI
+                $('#search').typeahead(null, {
+                    displayKey: 'num',
+                    source: numbers.ttAdapter()
+                });
+            });
+        </script>
     </head>
     <body class="skin-black">
         <!-- header logo: style can be found in header.less -->
@@ -513,14 +531,14 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span><%=((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getFirstName() %><i class="caret"></i></span>
+                                <span><%=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getFirstName()%><i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-black">
                                     <img src="img/Jane.png" class="img-circle" alt="User Image" />
                                     <p>
-                                        <%=((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getFirstName() %> - Developer
+                                        <%=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getFirstName()%> - Developer
                                         <small>Member since Nov. 2012</small>
                                     </p>
                                 </li>
@@ -536,7 +554,7 @@
                                         <a href="#" class="btn btn-default btn-flat" id="profile">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="<%=request.getContextPath() %>/logout" class="btn btn-default btn-flat" id="logout">Sign out</a>
+                                        <a href="<%=request.getContextPath()%>/logout" class="btn btn-default btn-flat" id="logout">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -555,10 +573,9 @@
                         <div class="pull-left image">
                             <img src="img/Jane.png" class="img-circle" alt="User Image" />
                         </div>
-                        <input type="hidden" name="session_empId" id="session_empId" value="<%=((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getEmpId() %>" />
-                        
+
                         <div class="pull-left info">
-                            <p>Hello, <%=((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getFirstName() %></p>
+                            <p>Hello, <%=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getFirstName()%></p>
 
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
@@ -625,17 +642,7 @@
         <jsp:include page="client.jsp" />
 
         <div id="dialog_profile" hidden="">
-            <p>Hi , I am <%=((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getFirstName() %></p>
+            <p>Hi , I am <%=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getFirstName()%></p>
         </div>
-
-        <div id="dialog_salesReport_geographicalSales" hidden="">
-        </div>
-
-        <div id="dialog_salesReport_profit" hidden="">
-
-        </div>
-
-       
-              
     </body>
 </html>

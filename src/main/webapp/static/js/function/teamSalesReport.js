@@ -1,15 +1,19 @@
-
-
 $(function() {
+    var img_totalSalesAmount;
+    var img_totalSalesUnit;
+    var img_salesByGeographics;
+    var json_topUnitSales;
+    var json_agentPerformanceSales;
+    var json_agentPerformanceUnit;
     $('#teamSalesReport').click(function() {
-        var session_empId = document.getElementById("session_empId").value;
         $.ajax({
-            url: "salesReportController",
-            data: {chartType: "teamSalesReport", empId: session_empId},
+            url: "SalesReportController",
+            data: {chartType: "teamSalesReport"
+            },
             success: function(jsonData) {
                 //Messenger
                 Messenger().post({
-                    message: 'Personal Sales Report is loaded success.',
+                    message: 'Team Sales Report is loaded success.',
                     type: 'success',
                     hideAfter:'3',
                     showCloseButton: true
@@ -17,7 +21,7 @@ $(function() {
                 
                 //dialog
                 $('#dialog_salesReport_teamSalesReport').dialog({
-                    "title": "Personal Sales Report",
+                    "title": "Team Sales Report",
                     width: 650,
                     height: 550,
                     "buttons": {
@@ -55,6 +59,9 @@ $(function() {
                                 };
 
                                 var chart = new google.visualization.LineChart(document.getElementById('salesReport_teamSalesReport_totalSalesAmount'));
+                                google.visualization.events.addListener(chart, 'ready', function() {
+                                    img_totalSalesAmount = chart.getImageURI();
+                                });
                                 chart.draw(data, options);
                             }, 'packages': ['corechart']});
                         
@@ -73,6 +80,9 @@ $(function() {
                                 };
 
                                 var chart = new google.visualization.LineChart(document.getElementById('salesReport_teamSalesReport_totalSalesUnit'));
+                                google.visualization.events.addListener(chart, 'ready', function() {
+                                    img_totalSalesUnit = chart.getImageURI();
+                                });
                                 chart.draw(data, options);
                             }, 'packages': ['corechart']});
                                 
@@ -92,6 +102,9 @@ $(function() {
                                 };
 
                                 var chart = new google.visualization.GeoChart(document.getElementById('salesReport_teamSalesReport_salesByGeog'));
+                                google.visualization.events.addListener(chart, 'ready', function() {
+                                    img_salesByGeographics = chart.getImageURI();
+                                });
                                 chart.draw(data, options);
                             }, 'packages': ['corechart']});
                         
@@ -101,7 +114,7 @@ $(function() {
                                 data.addColumn('number', 'Price');
                                 json = $.parseJSON(jsonData.topUnitSales);
                                 data.addRows(json);
-
+                                json_topUnitSales = json;
                                 var table = new google.visualization.Table(document.getElementById('salesReport_teamSalesReport_topUnitSales'));
                                 table.draw(data, {showRowNumber: true});
                             }, 'packages': ['table']});
@@ -113,7 +126,7 @@ $(function() {
                                 data.addColumn('number', 'Sales($)');
                                 json = $.parseJSON(jsonData.agentPerformanceSales);
                                 data.addRows(json);
-   
+                                json_agentPerformanceSales = json;
                                 var table = new google.visualization.Table(document.getElementById('salesReport_teamSalesReport_agentPerformanceSales'));
                                 table.draw(data, {showRowNumber: true});
                             }, 'packages': ['table']});
@@ -125,7 +138,7 @@ $(function() {
                                 data.addColumn('number', 'Number of Units');
                                 json = $.parseJSON(jsonData.agentPerformanceUnit);
                                 data.addRows(json);
-
+                                json_agentPerformanceUnit = json;
                                 var table = new google.visualization.Table(document.getElementById('salesReport_teamSalesReport_agentPerformanceUnit'));
                                 table.draw(data, {showRowNumber: true});
                             }, 'packages': ['table']});
@@ -158,6 +171,73 @@ $(function() {
             },
             dataType: "json"
         });
+    });
+    
+    $('#export_teamSalesReport_pdf').click(function() {
+        var doc = new jsPDF('p', 'pt', 'a4', true);
+        var specialElementHandlers = {
+            '#editor': function(element, renderer) {
+                return true;
+            }
+        };
+        doc.setFontSize(20);
+        doc.text(200, 50, "Team Sales Report");
+        doc.setFontSize(10);
+        doc.text(450, 50, new Date().toDateString());
+        doc.addImage(img_totalSalesAmount, "PNG", 100, 70);
+        doc.addImage(img_totalSalesUnit, "PNG", 100, 270);
+        doc.setFontSize(9);
+        doc.text(170, 460, "Sales By Geographics");
+        doc.addImage(img_salesByGeographics, "PNG", 100, 470);
+        doc.text(170, 660, "Top Unit Sales");
+        doc.table(160, 670, formatTopUnitSales(json_topUnitSales), ["Unit Name", "Price"], {
+            autoSize: true,
+            fontSize: 10
+        });
+        doc.addPage();
+        doc.text(170, 50, "Agent Performance (Sales)");
+        doc.table(160, 60, formatAgentPerformanceSales(json_agentPerformanceSales), ["Employee ID", "Name", "Sales($)"], {
+            autoSize: true,
+            fontSize: 10
+        });
+        doc.text(170, 250, "Agent Performance (Unit)");
+        doc.table(160, 260, formatAgentPerformanceUnit(json_agentPerformanceSales), null, {
+            autoSize: true,
+            fontSize: 10
+        });
+        doc.save('team_sales_report.pdf');
+        function formatTopUnitSales(json) {
+            var jsonObj = [];
+            $.each(json, function(i, row) {
+                jsonObj.push({
+                    "Unit Name": row[0],
+                    Price: row[1]
+                });
+            });
+            return jsonObj;
+        }
+        function formatAgentPerformanceSales(json) {
+            var jsonObj = [];
+            $.each(json, function(i, row) {
+                jsonObj.push({
+                    "Employee ID": row[0],
+                    Name: row[1],
+                    "Sales($)": row[2]
+                });
+            });
+            return jsonObj;
+        }
+        function formatAgentPerformanceUnit(json) {
+            var jsonObj = [];
+            $.each(json, function(i, row) {
+                jsonObj.push({
+                    "Employee ID": row[0],
+                    Name: row[1],
+                    "Number of Units": row[2]
+                });
+            });
+            return jsonObj;
+        }
     });
 
 });

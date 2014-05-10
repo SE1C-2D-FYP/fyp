@@ -1,9 +1,9 @@
-<div class="col-xs-12 connectedSortable">
+<!--<div class="col-xs-12 connectedSortable">
     <button id="showClientList" class="btn btn-primary">Show Client List</button>
-</div><!-- /.col -->
+</div> /.col -->
 
 <div id="list" hidden="">
-    <div class="col-xs-12 connectedSortable">
+    <div class="connectedSortable">
         <button id="insertNewClient" class="btn btn-primary">Create New Client</button>
     </div><!-- /.col -->
     <table cellpadding="0" cellspacing="0" border="0" id="listClient">
@@ -178,11 +178,14 @@
 </div><!-- /.box -->
 
 <div id="detail" hidden="">
-    <div id="clientDetail"></div>
-    <div class="col-xs-12 connectedSortable">
+    <div id="client_tab_control">
+    </div>
+    <div class="tab-content" id="clientDetail">
+    </div>
+    <div class="connectedSortable">
         <button id="editAClient" class="btn btn-primary">Edit</button>
     </div><!-- /.col -->
-    <div class="col-xs-12 connectedSortable">
+    <div class="connectedSortable">
         <button id="insertNewContact" class="btn btn-primary">Create Contact</button>
     </div><!-- /.col -->
 </div>

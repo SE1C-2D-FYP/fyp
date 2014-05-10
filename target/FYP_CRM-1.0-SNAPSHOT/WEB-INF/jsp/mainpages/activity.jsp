@@ -58,9 +58,7 @@
                 <div class="tab-pane" id="calendar_panel">
                     <div>
                         <div id="calendar_calendar_panel">
-                            <script>
-                                        $('#calendar_calendar_panel').fullCalendar('render');
-                                </script>
+
                         </div>
                     </div>
                 </div>

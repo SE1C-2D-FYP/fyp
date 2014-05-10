@@ -6,12 +6,18 @@ $(function() {
 //      activeHeader: "ui-icon-triangle-1-s"
 
 //    };
-$('#myTab a').click(function (e) {
-  e.preventDefault()
-  $(this).tab('show')
-})
-
-
+//    $('#myTab a').click(function(e) {
+//        e.preventDefault();
+//        $(this).tab('show');
+//    });
+    $('#activity_tab').on('shown.bs.tab', 'a[data-toggle="tab"]', function(e) {
+        $('#calendar_calendar_panel').fullCalendar('render');
+    });
+//    $('#activity_tab').tabs({
+//        activate: function(event, ui) {
+//            $('#calendar_calendar_panel').fullCalendar('render');
+//        }
+//    });
     $('.formContent').hide();
     $('.formTitle').click(function() {
         if ($(this).next().is(':hidden') != true) {
@@ -129,7 +135,6 @@ var loadActivityLists = function() {
         success: function(data) {
 
             loadFormDetails(data);
-
         },
         failure: function(errMsg) {
             alert(errMsg);
@@ -142,7 +147,7 @@ var loadActivityListsBySearch = function() {
     var text = JSON.stringify($("#searchform").find(":input").filter(function() {
         return $.trim(this.value).length > 0;
     }).serializeJSON());
-    
+
 //    alert($("#aa").val());
     $.ajax({
         type: "POST",
@@ -267,7 +272,7 @@ var loadFormDetails = function(data) {
     $('#todayRecords').html(todayrcs);
     $('#futureRecords').html(futurercs);
     $('#pastRecords').html(pastrcs);
-}
+};
 var updateActivity = function() {
     var id = $('input[name="formId"]').val();
     var title = $('.actTitle').val();

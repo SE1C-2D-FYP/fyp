@@ -1,15 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.crm.jsonmodel;
 
-
+import com.crm.models.Employee;
 import com.crm.util.HibernateUtil;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.hibernate.Session;
 
@@ -46,6 +43,7 @@ public class Chart {
         } catch (Exception e) {
             jsonString = "error";
         }
+        System.out.println(jsonString);
         session.close();
         return jsonString;
     }
@@ -53,14 +51,23 @@ public class Chart {
     public String getTeamMember(String empId) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         String sqlString = "SELECT emp_id, eng_surname, eng_other_name FROM employee WHERE supervisor_id = '" + empId + "'";
-        List teamMemberList = session.createSQLQuery(sqlString).list();
+        List tempTeamMemberList = session.createSQLQuery(sqlString).list();
+//        Iterator iterator = tempTeamMemberList.iterator();
+//        List teamMemberList = new ArrayList();
+//        while (iterator.hasNext()) {
+//            Object[] row = (Object[]) iterator.next();
+//            TeamMember teamMember = new TeamMember((String)row[0], (String)row[1], (String)row[2]);
+//            teamMemberList.add(teamMember);
+//        }
+//        TeamMemberList memberList = new TeamMemberList(teamMemberList);
         ObjectMapper mapper = new ObjectMapper();
         String jsonString;
         try {
-            jsonString = mapper.writeValueAsString(teamMemberList);
+            jsonString = mapper.writeValueAsString(tempTeamMemberList);
         } catch (Exception e) {
             jsonString = "No team member.";
         }
+        System.out.println(jsonString);
         session.close();
         return jsonString;
     }
@@ -101,5 +108,14 @@ public class Chart {
         }
         session.close();
         return jsonString;
+    }
+    
+    public String checkSupervisor(String selfEmpId, String empId) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Employee target = (Employee)session.get(Employee.class, empId);
+        if(target == null || target.getSupervisorId() == null || !target.getSupervisorId().getEmpId().equals(selfEmpId))
+            return "error";
+        else
+            return getPersonalSalesReportData(empId);
     }
 }

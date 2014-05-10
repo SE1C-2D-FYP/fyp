@@ -1,4 +1,3 @@
-
 $(function() {
     $('#calendar').fullCalendar({
         editable: true, //Enable drag and drop

@@ -174,6 +174,7 @@ public class Employee implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public Collection<ActivityNote> getActivityNoteCollection() {
         return activityNoteCollection;
     }

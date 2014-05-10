@@ -9,6 +9,7 @@ $(function() {
     function openDialog(id, title) {
         id.dialog({
             "title": title,
+            "width": 'auto',
             "buttons": {
                 "OK": function() {
                     $(this).dialog("close");
@@ -100,8 +101,14 @@ $(function() {
             },
             dataType: "json",
             success: function(data) {
+                targetClientId = data.clientId;
                 $('#clientDetail').text("");
-                $('#clientDetail').append("<div class=\"col-md-6\"><div class=\"box box-success\"><div class=\"box-header\">"
+                $('#client_tab_control').text("");
+                $('#client_tab_control').append("<ul class=\"nav nav-tabs\">" +
+                        "<li class=\"active\"><a href=\"#clientDetail_panel\" data-toggle=\"tab\">Detail</a></li>" +
+                        "<li><a href=\"#clientContactInfo_panel\" data-toggle=\"tab\">Contact Info</a></li>" +
+                        "</ul>");
+                $('#clientDetail').append("<div class=\"tab-pane active\" id=\"clientDetail_panel\"><div class=\"box box-success\"><div class=\"box-header\">"
                         + "<h3 class=\"box-title\">Client Detail</h3></div>"
                         + "<div class=\"box-body\"><label>Client Name: </label><label>"
                         + data.clientName + "</label><br />"
@@ -125,7 +132,7 @@ $(function() {
                 $('[name=editFax]').val(data.faxNo);
                 $('[name=editEmail]').val(data.email);
                 $('[name=ctClientId]').val(data.clientId);
-                showContactInfo(clientId);
+                showContactInfo(data.clientId);
             }
         });
     }
@@ -139,13 +146,15 @@ $(function() {
             },
             dataType: "json",
             success: function(data) {
-                $('#clientDetail').append("<div class=\"col-md-6\"><div class=\"box box-warning\"><div class=\"box-header\">"
-                        + "<h3 class=\"box-title\">Contact Information</h3></div>");
+                htmlString = "<div class=\"tab-pane\" id=\"clientContactInfo_panel\"><div class=\"box box-warning\"><div class=\"box-header\">"
+                        + "<h3 class=\"box-title\">Contact Information</h3></div>";
                 $.each(data, function(i, element) {
-                    $('#clientDetail').append("<div class=\"box-body\"><label>Name: </label><label>" + element['engName'] + "</label><br />");
-                    $('#clientDetail').append("<label>Phone Type: </label><label>" + element['phoneType'] + "</label><br />");
-                    $('#clientDetail').append("<label>Phone No.: </label><label>" + element['phoneNum'] + "</label><br />");
+                    htmlString = htmlString.concat("<div class=\"box-body\"><label>Name: </label><label>" + element['engName'] + "</label><br />");
+                    htmlString = htmlString.concat("<label>Phone Type: </label><label>" + element['phoneType'] + "</label><br />");
+                    htmlString = htmlString.concat("<label>Phone No.: </label><label>" + element['phoneNum'] + "</label><br /></div>");
                 });
+                htmlString = htmlString.concat("</div></div>");
+                $('#clientDetail').append(htmlString);
             }
         });
     }

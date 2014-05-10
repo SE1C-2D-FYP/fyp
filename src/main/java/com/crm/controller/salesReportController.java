@@ -1,20 +1,21 @@
-
 package com.crm.controller;
 
 import com.crm.jsonmodel.Chart;
+import com.crm.security.User;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
  * @author comon
  */
-@WebServlet(name = "salesReportController", urlPatterns = {"/salesReportController"})
-public class salesReportController extends HttpServlet {
+@WebServlet(name = "SalesReportController", urlPatterns = {"/SalesReportController"})
+public class SalesReportController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,12 +31,16 @@ public class salesReportController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String jsonString = "";
         Chart chart = new Chart();
-        if(request.getParameter("chartType").equals("personalSalesReport"))
-            jsonString = chart.getPersonalSalesReportData(request.getParameter("empId"));
-        else if(request.getParameter("chartType").equals("teamSalesReport"))
-            jsonString = chart.getTeamSalesReportData("empId");
+        String empId = ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getEmpId();
+        if(request.getParameter("chartType").equals("personalSalesReport")) {
+            if (request.getParameter("empId") == null)
+                jsonString = chart.getPersonalSalesReportData(empId);
+            else
+                jsonString = chart.checkSupervisor(empId, request.getParameter("empId"));
+        } else if(request.getParameter("chartType").equals("teamSalesReport"))
+            jsonString = chart.getTeamSalesReportData(empId);
         else if(request.getParameter("chartType").equals("teamMemberList"))
-            jsonString = chart.getTeamMember(request.getParameter("empId"));
+            jsonString = chart.getTeamMember(empId);
         StringBuilder sb = new StringBuilder();
         sb.append(jsonString);
         response.getWriter().write(sb.toString());
