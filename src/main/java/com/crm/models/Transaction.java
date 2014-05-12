@@ -38,8 +38,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Transaction.findByInstDate", query = "SELECT t FROM Transaction t WHERE t.instDate = :instDate"),
     @NamedQuery(name = "Transaction.findByAgreementDate", query = "SELECT t FROM Transaction t WHERE t.agreementDate = :agreementDate"),
     @NamedQuery(name = "Transaction.findByTransDate", query = "SELECT t FROM Transaction t WHERE t.transDate = :transDate"),
-    @NamedQuery(name = "Transaction.findByCommission", query = "SELECT t FROM Transaction t WHERE t.commission = :commission")})
+    @NamedQuery(name = "Transaction.findByCommission", query = "SELECT t FROM Transaction t WHERE t.commission = :commission"),
+    @NamedQuery(name = "Transaction.findByClientId", query = "SELECT t FROM Transaction t WHERE t.clientId = :clientId")})
 public class Transaction implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -74,6 +76,9 @@ public class Transaction implements Serializable {
     @JoinColumn(name = "EMP_ID", referencedColumnName = "EMP_ID")
     @ManyToOne(optional = false)
     private Employee empId;
+    @JoinColumn(name = "CLIENT_ID", referencedColumnName = "CLIENT_ID")
+    @ManyToOne(optional = false)
+    private Client clientId;
 
     public Transaction() {
     }
@@ -169,6 +174,14 @@ public class Transaction implements Serializable {
     public void setEmpId(Employee empId) {
         this.empId = empId;
     }
+    
+    public Client getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(Client clientId) {
+        this.clientId = clientId;
+    }
 
     @Override
     public int hashCode() {
@@ -194,5 +207,5 @@ public class Transaction implements Serializable {
     public String toString() {
         return "com.crm.models.Transaction[ txId=" + txId + " ]";
     }
-    
+
 }

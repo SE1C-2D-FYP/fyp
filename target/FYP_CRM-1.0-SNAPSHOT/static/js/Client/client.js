@@ -107,6 +107,8 @@ $(function() {
                 $('#client_tab_control').append("<ul class=\"nav nav-tabs\">" +
                         "<li class=\"active\"><a href=\"#clientDetail_panel\" data-toggle=\"tab\">Detail</a></li>" +
                         "<li><a href=\"#clientContactInfo_panel\" data-toggle=\"tab\">Contact Info</a></li>" +
+                        "<li><a href=\"#clientTransactionInfo_panel\" data-toggle=\"tab\">Transaction Info</a></li>" +
+                        "<li><a href=\"#clientContactRecord_panel\" data-toggle=\"tab\">Contact Record</a></li>" +
                         "</ul>");
                 $('#clientDetail').append("<div class=\"tab-pane active\" id=\"clientDetail_panel\"><div class=\"box box-success\"><div class=\"box-header\">"
                         + "<h3 class=\"box-title\">Client Detail</h3></div>"
@@ -122,7 +124,7 @@ $(function() {
                         + data.faxNo + "</label><br />"
                         + "<label>E-mail Address: </label><label>"
                         + data.email + "</label><br />"
-                        + "</div></div></div>");
+                        + "</div></div>        <button id=\"editAClient\" class=\"btn btn-primary\">Edit</button></div>");
                 $('[name=clientId]').val(data.clientId);
                 $('[name=empId]').val(data.empId);
                 $('[name=editClientName]').val(data.clientName);
@@ -139,7 +141,7 @@ $(function() {
 
     function showContactInfo(clientId) {
         $.ajax({
-            type: "Get",
+            type: "POST",
             url: "./ShowContactInfo",
             data: {
                 id: clientId
@@ -153,8 +155,9 @@ $(function() {
                     htmlString = htmlString.concat("<label>Phone Type: </label><label>" + element['phoneType'] + "</label><br />");
                     htmlString = htmlString.concat("<label>Phone No.: </label><label>" + element['phoneNum'] + "</label><br /></div>");
                 });
-                htmlString = htmlString.concat("</div></div>");
+                htmlString = htmlString.concat("</div><button id=\"insertNewContact\" class=\"btn btn-primary\">Create Contact</button></div>");
                 $('#clientDetail').append(htmlString);
+                showTransactionInfo(clientId);
             }
         });
     }
@@ -164,6 +167,91 @@ $(function() {
             var id = $('td', this).eq(0).text();
             showClientDetail(id);
             openDialog($('#detail'), "Client Detail");
+        });
+    }
+    
+    function showTransactionInfo(clientId) {
+        $("#clientDetail").append("<div class=\"tab-pane\" id=\"clientTransactionInfo_panel\">" +
+                "<table cellpadding=\"9\" cellspacing=\"9\" border=\"0\" id=\"clientTransactionInfo_table\">" +
+                "<thead><tr>" +
+                "<th style=\"text-align: center;\">Date</th>" +
+                "<th style=\"text-align: center;\">Address</th>" +
+                "<th style=\"text-align: center;\">Area</th>" +
+                "<th style=\"text-align: center;\">Type</th>" +
+                "<th style=\"text-align: center;\">Price</th>" +
+                "<th style=\"text-align: center;\">Commission</th>" +  
+                "<th style=\"text-align: center;\">Agreement</th>" + 
+                "</tr></thead><tbody></tbody></table>" +
+                "<div class=\"connectedSortable\">" +
+//                "<button id=\"insertNewClient\" class=\"btn btn-primary\">Create New Client</button>" +
+                "</div></div>");
+        
+        var transactionInfoTable = $('#clientTransactionInfo_table').DataTable({
+            "fnServerParams": function(aoData) {
+                aoData.push({
+                    'name': 'clientId', 'value': clientId
+                });
+            },
+            "sAjaxSource": "./ShowTransactionInfo",
+            "sPaginationType": "full_numbers",
+            "bAutoWidth": true,
+            "bDestroy": true,
+                "columns": [
+                { "data": "0" },
+                { "data": "1" },
+                { "data": "2" },
+                { "data": "3" },
+                { "data": "4" },
+                { "data": "5" },
+                { "data": "6" }
+                ],
+            "aoCloumnDefs": [
+                {"bVisible": false, "aTargets": [0]}
+            ]
+        });
+        showContactRecord(clientId);
+    }
+    
+    function showContactRecord(clientId) {
+        $("#clientDetail").append("<div class=\"tab-pane\" id=\"clientContactRecord_panel\">" +
+                "<table cellpadding=\"9\" cellspacing=\"9\" border=\"0\" id=\"clientContactRecord_table\">" +
+                "<thead><tr>" +
+                "<th style=\"text-align: center;\">Date</th>" +
+                "<th style=\"text-align: center;\">Time</th>" +
+                "<th style=\"text-align: center;\">Contact Person</th>" +
+                "<th style=\"text-align: center;\">Phone Number</th>" +
+                "<th style=\"text-align: center;\">Stock ID</th>" +
+                "<th style=\"text-align: center;\">Type</th>" +
+                "<th style=\"text-align: center;\">Price per feet</th>" +
+                "<th style=\"text-align: center;\">Memo</th>" +
+                "</tr></thead><tbody></tbody></table>" +
+                "<div class=\"connectedSortable\">" +
+//                "<button id=\"insertNewClient\" class=\"btn btn-primary\">Create New Client</button>" +
+                "</div></div>");
+
+        var contactRecordTable = $('#clientContactRecord_table').DataTable({
+            "fnServerParams": function(aoData) {
+                aoData.push({
+                    'name': 'clientId', 'value': clientId
+                });
+            },
+            "sAjaxSource": "./ShowContactRecord",
+            "sPaginationType": "full_numbers",
+            "bAutoWidth": true,
+            "bDestroy": true,
+            "columns": [
+                {"data": "0"},
+                {"data": "1"},
+                {"data": "2"},
+                {"data": "3"},
+                {"data": "4"},
+                {"data": "5"},
+                {"data": "6"},
+                {"data": "7"}
+            ],
+            "aoCloumnDefs": [
+                {"bVisible": false, "aTargets": [0]}
+            ]
         });
     }
 
@@ -223,7 +311,7 @@ $(function() {
         showDetail();
     });
 
-    $('#editAClient').click(function() {
+    $('#clientDetail').on('click', '#editAClient', function() {
         openDialog($('#editClientForm'), "Edit");
     });
 
@@ -231,7 +319,7 @@ $(function() {
         openDialog($('#insertClientForm'), "New Client");
     });
 
-    $('#insertNewContact').click(function() {
+    $('#clientDetail').on('click', '#insertNewContact', function() {
         openDialog($('#insertContactForm'), "New Contact");
     });
 

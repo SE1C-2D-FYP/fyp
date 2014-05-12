@@ -3,29 +3,21 @@
 </div> /.col -->
 
 <div id="list" hidden="">
-    <div class="connectedSortable">
-        <button id="insertNewClient" class="btn btn-primary">Create New Client</button>
-    </div><!-- /.col -->
-    <table cellpadding="0" cellspacing="0" border="0" id="listClient">
+    <table cellpadding="9" cellspacing="9" border="0" id="listClient">
         <thead>
             <tr>
-                <th>ClientID</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Phone</th>
+                <th style="text-align: center;">Client ID</th>
+                <th style="text-align: center;">Name</th>
+                <th style="text-align: center;">Address</th>
+                <th style="text-align: center;">Phone</th>
             </tr>
         </thead>
         <tbody>
         </tbody>
-        <tfoot>
-            <tr>
-                <th>ClientID</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Phone</th>
-            </tr>
-        </tfoot>
     </table>
+    <div class="connectedSortable">
+        <button id="insertNewClient" class="btn btn-primary">Create New Client</button>
+    </div><!-- /.col -->
 </div>
 
 <div class="box box-primary" hidden="" id="insertClientForm">
@@ -182,10 +174,8 @@
     </div>
     <div class="tab-content" id="clientDetail">
     </div>
+
     <div class="connectedSortable">
-        <button id="editAClient" class="btn btn-primary">Edit</button>
-    </div><!-- /.col -->
-    <div class="connectedSortable">
-        <button id="insertNewContact" class="btn btn-primary">Create Contact</button>
+        
     </div><!-- /.col -->
 </div>
