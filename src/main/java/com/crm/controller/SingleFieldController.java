@@ -29,7 +29,7 @@ public class SingleFieldController {
 
         ActivityNoteDaoImpl activityNoteDaoImpl = new ActivityNoteDaoImpl();
         ActivityManager am = new ActivityManager(activityNoteDaoImpl);
-        return am.getActivityForm("H0000011");
+        return am.getActivityForm(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getEmpId());
 
     }
 
@@ -76,8 +76,8 @@ public class SingleFieldController {
         ActivityNoteDaoImpl activityNoteDaoImpl = new ActivityNoteDaoImpl();
         ActivityManager am = new ActivityManager(activityNoteDaoImpl);
         EmployeeDao employeeDao = new EmployeeDaoImpl();
-        Employee employee = employeeDao.findByEmpId("H0000011");
-        return am.getActivityFormBySearch("H0000011", searchActivityNoteJson);        
+        Employee employee = employeeDao.findByEmpId(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getEmpId());
+        return am.getActivityFormBySearch(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getEmpId(), searchActivityNoteJson);        
     }
     
     @RequestMapping(value = "updateActivity", method = RequestMethod.POST)

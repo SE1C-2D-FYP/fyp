@@ -43,6 +43,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ActivityNote.findByCreateDate", query = "SELECT a FROM ActivityNote a WHERE a.createDate = :createDate"),
     @NamedQuery(name = "ActivityNote.findByUpdatedDate", query = "SELECT a FROM ActivityNote a WHERE a.updatedDate = :updatedDate")})
 public class ActivityNote implements Serializable {
+    @Size(max = 1)
+    @Column(name = "IS_READ")
+    private String isRead;
 //    @SequenceGenerator(name="EL_SEQ", sequenceName="EL_SEQ",allocationSize=1)
 
     private static final long serialVersionUID = 1L;
@@ -198,5 +201,13 @@ public class ActivityNote implements Serializable {
     @Override
     public String toString() {
         return "com.crm.models.ActivityNote[ aNId=" + aNId + " ]";
+    }
+
+    public String getIsRead() {
+        return isRead;
+    }
+
+    public void setIsRead(String isRead) {
+        this.isRead = isRead;
     }
 }

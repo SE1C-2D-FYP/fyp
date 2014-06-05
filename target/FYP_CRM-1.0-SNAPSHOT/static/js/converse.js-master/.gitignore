@@ -1,0 +1,19 @@
+*~
+*.mo
+*.kpf
+*.swp
+.*.cfg
+.hg/
+.bzr/
+.svn/
+.project
+.pydevproject
+node_modules
+components
+docs/doctrees/environment.pickle
+tags
+stamp-npm
+stamp-bower
+
+# OSX
+.DS_Store

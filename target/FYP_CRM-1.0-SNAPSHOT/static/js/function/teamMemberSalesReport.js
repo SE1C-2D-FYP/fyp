@@ -70,23 +70,36 @@ $(function() {
                                                     $("#dialog_salesReport_personalSalesReport").dialog("destroy").remove();
                                                 $(document.body).append("<div id=\"dialog_salesReport_personalSalesReport\" style=\"display:none;\">" + "<div class=\"box box-success\" >\n" + 
                                                         "<div class=\"box-header\">" +
-                                                        "<h3 class=\"box-title\">Personal Sales Report</h3>" +
+                                                        "<h3 class=\"box-title\">" + data.getValue(selectedItem[0].row, 1) + " " + data.getValue(selectedItem[0].row, 2) + "</h3>" +
                                                         "</div>" + 
-                                                        "<div class=\"box-body chart-responsive\">" + 
-                                                        "<div class=\"pull-right box-tools\">" + 
-                                                        "<div class=\"btn-group\">" + 
-                                                        "<button class=\"btn btn-warning btn-sm dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"fa fa-bars\"></i></button>" + 
-                                                        "<ul class=\"dropdown-menu pull-right\" role=\"menu\">" + 
-                                                        "<li><a href=\"#\" id=\"export_personalSalesReport_pdf\">Export to PDF</a></li>" + 
+                                                        "<div class=\"box-body chart-responsive\">" +
+                                                        "<div>" +
+                                                        "<ul class=\"nav nav-tabs\" id=\"personalSalesReport_tab\">" +
+                                                        "<li class=\"active\"><a href=\"#personalSalesReport_topSales_panel\" data-toggle=\"tab\">Total Sales</a></li>" +
+                                                        "<li><a href=\"#personalSalesReport_geo_panel\" data-toggle=\"tab\">Geographical</a></li>" +
+                                                        "<li><a href=\"#personalSalesReport_topUnitSales_panel\" data-toggle=\"tab\">Top Unit Sales</a></li>" +
+                                                        "<div class=\"pull-right box-tools\">" +
+                                                        "<div class=\"btn-group\">" +
+                                                        "<button class=\"btn btn-warning btn-sm dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"fa fa-bars\"></i></button>" +
+                                                        "<ul class=\"dropdown-menu pull-right\" role=\"menu\">" +
+                                                        "<li><a href=\"#\" id=\"export_personalSalesReport_pdf\">Export to PDF</a></li>" +
                                                         "</ul>" +
                                                         "</div>" +
                                                         "</div>" +
+                                                        "</ul>" +
+                                                        "</div>" +
+                                                        "<div class=\"tab-content\">" +
+                                                        "<div class=\"tab-pane active\" id=\"personalSalesReport_topSales_panel\">" +
                                                         "<div class = \"chart\" id = \"salesReport_personalSalesReport_totalSalesAmount\" style = \"height: 250px;\" > </div>" +
                                                         "<div class = \"chart\" id = \"salesReport_personalSalesReport_totalSalesUnit\" style = \"height: 250px\" > </div>" +
-                                                        "<h5> Sales by Geographics </h5>" +
-                                                        "<div class = \"chart\" id = \"salesReport_personalSalesReport_salesByGeog\" style = \"height: 250px\" > </div>" +
-                                                        "<h5 > Top Unit Sales </h5>" +
+                                                        "</div>" +
+                                                        "<div class=\"tab-pane\" id=\"personalSalesReport_geo_panel\">" +
+                                                        "<div class = \"chart\" id = \"salesReport_personalSalesReport_salesByGeog\" style = \"height: 400px\"></div>" +
+                                                        "</div>" +
+                                                        "<div class=\"tab-pane\" id=\"personalSalesReport_topUnitSales_panel\">" +
                                                         "<div class = \"chart\" id = \"salesReport_personalSalesReport_topUnitSales\" style = \"height: 250px\" > </div>" +
+                                                        "</div>" +
+                                                        "</div>" +
                                                         "</div><!-- /.box - body -- >" +
                                                         "</div><!-- /.box -- >" +
                                                         "</div>" +
@@ -197,7 +210,7 @@ $(function() {
                                                                 data.addRows(json);
 
                                                                 var table = new google.visualization.Table(document.getElementById('salesReport_personalSalesReport_topUnitSales'));
-                                                                table.draw(data, {showRowNumber: true});
+                                                                table.draw(data, {width: 550, showRowNumber: true});
                                                             }, 'packages': ['table']});
                                                     }, // event
                                                     "beforeCollapse": function(evt, dlg) {

@@ -165,6 +165,7 @@ public class Employee implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public Collection<Stock> getStockCollection() {
         return stockCollection;
     }
@@ -245,6 +246,7 @@ public class Employee implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public Collection<ContactNote> getContactNoteCollection() {
         return contactNoteCollection;
     }

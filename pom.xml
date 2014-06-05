@@ -42,6 +42,41 @@
             <version>2.2.4</version>
         </dependency>
         <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>smack-3.2.1</groupId>
+            <artifactId>smack-3.2.1</artifactId>
+            <version>smack-3.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>smack-bosh-3.2.2</groupId>
+            <artifactId>smack-bosh-3.2.2</artifactId>
+            <version>smack-bosh-3.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>smackx-3.2.1</groupId>
+            <artifactId>smackx-3.2.1</artifactId>
+            <version>smackx-3.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>xlightweb-2.5-jar-with-dependencies</groupId>
+            <artifactId>xlightweb-2.5-jar-with-dependencies</artifactId>
+            <version>xlightweb-2.5-jar-with-dependencies</version>
+        </dependency>
+        <dependency>
+            <groupId>xpp3-1.1.4</groupId>
+            <artifactId>xpp3-1.1.4</artifactId>
+            <version>xpp3-1.1.4</version>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>6.0</version>

@@ -174,6 +174,7 @@ public class Unit implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public Collection<Stock> getStockCollection() {
         return stockCollection;
     }

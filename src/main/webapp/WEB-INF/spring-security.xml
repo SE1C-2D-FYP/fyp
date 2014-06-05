@@ -6,19 +6,20 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
         <!--<global-method-security pre-post-annotations="enabled" />-->
-    <http pattern="/static/**" security="none" />
+
+    <http pattern="/static/**" security="none"></http>
 	<http use-expressions="true" auto-config="true">
             <intercept-url pattern="/login*" access="isAnonymous()" />
-            <intercept-url pattern="/**" access="hasRole('ACCOUNT MANAGER')" />
-                
+            <intercept-url pattern="/**" access="hasAnyRole('ACCOUNT MANAGER', 'PROPERTY CONSULTANT')" />
+            
                 <form-login login-processing-url="/j_spring_security_check"
                             login-page="/login" default-target-url="/index"
-                            authentication-failure-url="/login"/>
+                            authentication-failure-url="/login?error=true"/>
                 <logout invalidate-session="true" logout-url="/logout" />
                 <remember-me services-ref="rememberMeServices" key="rememberMeFunction"/>
                 <!--<access-denied-handler error-page="activity"/>-->
 	</http>
-
+        
         <!--<bean id="a" class="com.crm.daoImpl.ActivityNoteDaoImpl"></bean>-->
         
 	<authentication-manager alias="authenticationManager">

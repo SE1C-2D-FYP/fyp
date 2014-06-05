@@ -9,8 +9,6 @@ package com.crm.client;
 import com.crm.models.Client;
 import com.crm.models.ContactInfo;
 import com.crm.util.HibernateUtil;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;

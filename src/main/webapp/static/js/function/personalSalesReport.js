@@ -22,10 +22,13 @@ $(function() {
                 if ($("#dialog_salesReport_personalSalesReport").length > 0)
                     $("#dialog_salesReport_personalSalesReport").dialog("destroy").remove();
                 $(document.body).append("<div id=\"dialog_salesReport_personalSalesReport\" style=\"display:none;\">" + "<div class=\"box box-success\" >\n" +
-                        "<div class=\"box-header\">" +
-                        "<h3 class=\"box-title\">Personal Sales Report</h3>" +
-                        "</div>" +
+     
                         "<div class=\"box-body chart-responsive\">" +
+                        "<div>" +
+                        "<ul class=\"nav nav-tabs\" id=\"personalSalesReport_tab\">" +
+                        "<li class=\"active\"><a href=\"#personalSalesReport_topSales_panel\" data-toggle=\"tab\">Total Sales</a></li>" +
+                        "<li><a href=\"#personalSalesReport_geo_panel\" data-toggle=\"tab\">Geographical</a></li>" +
+                        "<li><a href=\"#personalSalesReport_topUnitSales_panel\" data-toggle=\"tab\">Top Unit Sales</a></li>" +
                         "<div class=\"pull-right box-tools\">" +
                         "<div class=\"btn-group\">" +
                         "<button class=\"btn btn-warning btn-sm dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"fa fa-bars\"></i></button>" +
@@ -34,12 +37,20 @@ $(function() {
                         "</ul>" +
                         "</div>" +
                         "</div>" +
+                        "</ul>" +
+                        "</div>" +
+                        "<div class=\"tab-content\">" +
+                        "<div class=\"tab-pane active\" id=\"personalSalesReport_topSales_panel\">" +
                         "<div class = \"chart\" id = \"salesReport_personalSalesReport_totalSalesAmount\" style = \"height: 250px;\" > </div>" +
                         "<div class = \"chart\" id = \"salesReport_personalSalesReport_totalSalesUnit\" style = \"height: 250px\" > </div>" +
-                        "<h5> Sales by Geographics </h5>" +
-                        "<div class = \"chart\" id = \"salesReport_personalSalesReport_salesByGeog\" style = \"height: 250px\" > </div>" +
-                        "<h5 > Top Unit Sales </h5>" +
+                        "</div>" +
+                        "<div class=\"tab-pane\" id=\"personalSalesReport_geo_panel\">" +
+                        "<div class = \"chart\" id = \"salesReport_personalSalesReport_salesByGeog\" style = \"height: 400px\"></div>" +
+                        "</div>" +
+                        "<div class=\"tab-pane\" id=\"personalSalesReport_topUnitSales_panel\">" +
                         "<div class = \"chart\" id = \"salesReport_personalSalesReport_topUnitSales\" style = \"height: 250px\" > </div>" +
+                        "</div>" +
+                        "</div>" +
                         "</div><!-- /.box - body -- >" +
                         "</div><!-- /.box -- >" +
                         "</div>" +
@@ -48,9 +59,8 @@ $(function() {
                 //dialog
                 var reportDialog = $('#dialog_salesReport_personalSalesReport').dialog({
                     "title": "Personal Sales Report",
-                    width: 650,
-                    height: 550,
-                    modal: true,
+                    width: 'auto',
+                    height: 600,
                     autoOpen: false,
                     "buttons": {
                         "cancel": function() {
@@ -75,7 +85,7 @@ $(function() {
                         google.load('visualization', '1', {'callback': function() {
                                 var data = new google.visualization.DataTable();
                                 data.addColumn("string", "Year");
-                                data.addColumn("number", "Amount($");
+                                data.addColumn("number", "Amount($)");
                                 var json = $.parseJSON(jsonData.totalSalesAmount);
                                 data.addRows(json);
 
@@ -141,7 +151,7 @@ $(function() {
                                 var options = {
                                     region: 'HK',
                                     displayMode: 'markers',
-                                    width: 450,
+                                    width: 400,
                                     colorAxis: {colors: ['#000000', '#4374e0']} // orange to blue
                                 };
 
@@ -161,7 +171,7 @@ $(function() {
                                 json_topUnitSales = json;
                                 chart_topUnitSales = new google.visualization.Table(document.getElementById('salesReport_personalSalesReport_topUnitSales'));
 
-                                chart_topUnitSales.draw(data, {showRowNumber: true});
+                                chart_topUnitSales.draw(data, {showRowNumber: true, width: 400});
                             }, 'packages': ['table']});
                     }, // event
                     "beforeCollapse": function(evt, dlg) {
@@ -206,7 +216,7 @@ $(function() {
         });
     });
 
-    $('#export_personalSalesReport_pdf').click(function() {
+    $(document.body).on('click', '#export_personalSalesReport_pdf', function() {
         var doc = new jsPDF('p', 'pt', 'a4', true);
         var specialElementHandlers = {
             '#editor': function(element, renderer) {

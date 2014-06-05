@@ -1,12 +1,9 @@
-<%-- 
-    Document   : index
-    Created on : Feb 11, 2014, 8:19:52 PM
-    Author     : hong
---%>
 
+<%@page import="com.crm.security.Role"%>
 <%@page import="com.crm.security.User"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,32 +11,34 @@
         <title>Midland CRM System</title>
 
         <!-- bootstrap 3.0.2 -->
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <!-- Typeahead -->
-        <link href="css/typeahead.css" rel="stylesheet" type="text/css" />
+        <link href="static/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- font Awesome -->
-        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="static/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <!-- Ionicons -->
-        <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
-        <!-- Morris chart -->
-        <link href="css/morris/morris.css" rel="stylesheet" type="text/css" />
+        <link href="static/css/ionicons.min.css" rel="stylesheet" type="text/css" />
         <!-- jvectormap -->
-        <link href="css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+        <link href="static/css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
         <!-- fullCalendar -->
-        <link href="css/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css" />
-        <link href="css/fullcalendar/fullcalendar.print.css" rel="stylesheet" type="text/css" media='print' />
+        <link href="static/css/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css" />
+        <link href="static/css/fullcalendar/fullcalendar.print.css" rel="stylesheet" type="text/css" media='print' />
         <!-- Daterange picker -->
-        <link href="css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+        <link href="static/css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
         <!-- bootstrap wysihtml5 - text editor -->
-        <link href="css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+        <link href="static/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
         <!-- Messenger css -->
-        <link href="css/Messenger/messenger.css" rel="stylesheet" type="text/css" />
-        <link href="css/Messenger/messenger-theme-future.css" rel="stylesheet" type="text/css" />
+        <link href="static/css/Messenger/messenger.css" rel="stylesheet" type="text/css" />
+        <link href="static/css/Messenger/messenger-theme-future.css" rel="stylesheet" type="text/css" />
         <!-- Pace -->
-        <link href="css/pace.css" rel="stylesheet" type="text/css" />
+        <link href="static/css/pace.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
-        <link href="css/styles.css" rel="stylesheet" type="text/css" />
-
+        <link href="static/css/styles.css" rel="stylesheet" type="text/css" />
+        <!-- Panorama style -->
+        <link rel="stylesheet" href="static/css/panorama/index.css">
+        <link rel="stylesheet" href="static/css/panorama/leanorama.css">
+        <link rel="stylesheet" href="static/css/panorama/leanorama.hotspot.css">
+        <link rel="stylesheet" href="static/css/panorama/leanorama.controlbar.css">
+        <link rel="stylesheet" href="static/css/panorama/leanorama.infobox.css">
+        
         <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -47,140 +46,172 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
-
+ 
         <!-- DataTable css-->
-        <style type="text/css" title="currentStyle">
-            @import "css/datatables/dataTables.bootstrap.css";
-            @import "css/form.css";
-            @import "css/fieldset.css";
-            @import "css/datatables/dataTables.bootstrap.css";
-        </style>
+        <link href="static/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+  
 
-        <script src="js/jquery-ui-1.10.4.custom/js/jquery-1.10.2.js"></script>
+        <!-- Converse-->
+        
+
+
+
+        <script src="static/js/jquery-ui-1.10.4.custom/js/jquery-1.10.2.js"></script>
 
         <!-- jQuery 2.0.2 -->
         <!--<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>-->
         <!-- jQuery UI 1.10.3 -->
-        <script src="js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
+        <!--        <script src="js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>-->
         <!-- Bootstrap -->
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>
-        <!-- Typeahead -->
-        <script src="js/typeahead.bundle.js" type="text/javascript"></script>
-        <!-- Morris.js charts -->
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <script src="js/plugins/morris/morris.min.js" type="text/javascript"></script>
+        <script src="static/js/bootstrap.min.js" type="text/javascript"></script>
+
+
         <!-- Sparkline -->
-        <script src="js/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
+        <script src="static/js/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
         <!-- jvectormap -->
-        <script src="js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
-        <script src="js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
+        <script src="static/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
+        <script src="static/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
         <!-- fullCalendar -->
-        <script src="js/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
+        <script src="static/js/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
         <!-- jQuery Knob Chart -->
-        <script src="js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
+        <script src="static/js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
         <!-- daterangepicker -->
-        <script src="js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-        <!-- Bootstrap WYSIHTML5 -->
-        <script src="js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
+        <script src="static/js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
         <!-- iCheck -->
-        <script src="js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+        <script src="static/js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
         <!-- Messenger -->
-        <script src="js/plugins/Messenger/messenger.min.js" type="text/javascript"></script>
-        <script src="js/plugins/Messenger/messenger-theme-future.js" type="text/javascript"></script>
+        <script src="static/js/plugins/Messenger/messenger.min.js" type="text/javascript"></script>
+        <script src="static/js/plugins/Messenger/messenger-theme-future.js" type="text/javascript"></script>
         <!-- Pace -->
-        <script src="js/plugins/pace.js" type="text/javascript"></script>
+        <script src="static/js/plugins/pace.js" type="text/javascript"></script>
+
+        <!-- jsPDF-->
+        <script type="text/javascript" src="static/js/jspdf/jspdf.js"></script>
+        <script type="text/javascript" src="static/js/jspdf/jspdf.plugin.addimage.js"></script>
+        <script type="text/javascript" src="static/js/jspdf/jspdf.plugin.from_html.js"></script>
+        <script type="text/javascript" src="static/js/jspdf/jspdf.plugin.autoprint.js"></script>
+        <script type="text/javascript" src="static/js/jspdf/jspdf.plugin.split_text_to_size.js"></script>
+        <script type="text/javascript" src="static/js/jspdf/jspdf.plugin.total_pages.js"></script>
+        <script type="text/javascript" src="static/js/jspdf/jspdf.plugin.png_support.js"></script>
+        <script type="text/javascript" src="static/js/jspdf/jspdf.plugin.addhtml.js"></script>
+        <script type="text/javascript" src="static/js/jspdf/jspdf.plugin.standard_fonts_metrics.js"></script>
+        <script type="text/javascript" src="static/js/jspdf/jspdf.plugin.cell.js"></script>
+        <script type="text/javascript" src="static/js/jspdf/libs/png_support/png.js"></script>
+        <script type="text/javascript" src="static/js/jspdf/libs/png_support/zlib.js"></script>
+        <script type="text/javascript" src="static/js/jspdf/libs/FileSaver.js/FileSaver.min.js"></script>
+        <script type="text/javascript" src="static/js/jspdf/libs/Deflate/adler32cs.js"></script>
+        <script type="text/javascript" src="static/js/jspdf/libs/Deflate/deflate.js"></script>
+
+
+        
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script>
+        <script type="text/javascript" src="static/js/jquery.dialogextend.js"></script>
 
         <!-- AdminLTE App -->
-        <script src="js/AdminLTE/app.js" type="text/javascript"></script>
+        <script src="static/js/AdminLTE/app.js" type="text/javascript"></script>
 
-        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-        <script type="text/javascript" src="js/jquery.dialogextend.js"></script>
-
-        <script src="js/date.js"></script>
-        <link rel="stylesheet" href="css/site.css">
+        <script src="static/js/date.js" type="text/javascript" ></script>
+        <link rel="stylesheet" href="static/css/site.css" />
         <!-- bootbox code -->
-        <script src="js/bootbox.min.js"></script>
+        <script src="static/js/bootbox.min.js"></script>
         <!-- DataTable code-->
-        <script src="js/DataTable/jquery.dataTables.min.js" type="text/javascript"></script>
-        <script src="js/DataTable/jquery.dataTables.js" type="text/javascript"></script>
+        <script src="static/js/DataTable/jquery.dataTables.js" type="text/javascript"></script>
+        <script src="static/js/DataTable/dataTables.bootstrap.js" type="text/javascript"></script>
         <!-- Google Chart API-->
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <script type="text/javascript" src="js/marioizquierdo-jquery.serializeJSON-6f7f574/jquery.serializejson.min.js"></script>
-        <!-- jsPDF-->
-        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.js"></script>
-        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.plugin.addimage.js"></script>
-        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.plugin.autoprint.js"></script>
-        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.plugin.split_text_to_size.js"></script>
-        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.plugin.total_pages.js"></script>
-        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.plugin.png_support.js"></script>
-        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.plugin.addhtml.js"></script>
-        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.plugin.from_html.js"></script>
-        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.plugin.standard_fonts_metrics.js"></script>
-        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/jspdf.plugin.cell.js"></script>
-        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/libs/png_support/png.js"></script>
-        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/libs/png_support/zlib.js"></script>
-        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/libs/FileSaver.js/FileSaver.min.js"></script>
-        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/libs/Deflate/adler32cs.js"></script>
-        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/libs/Deflate/deflate.js"></script>
-        <script type="text/javascript" src="js/jsPDF-0.9.0rc2/html2canvas.js"></script>
+        <script type="text/javascript" src="static/js/jquery.serializejson/jquery.serializejson.min.js" ></script>
+        <!-- ajaxfileupload-->
+        <script src="static/js/jquery.ajaxfileupload.js"></script>
         <!-- Function JS -->
-        <script src="js/function/personalSalesReport.js" type="text/javascript"></script>
-        <script src="js/function/teamSalesReport.js" type="text/javascript"></script>
-        <script src="js/function/teamMemberSalesReport.js" type="text/javascript"></script>
-        <script src="js/function/calendar.js" type="text/javascript"></script>
-        <script src="js/Client/client.js" type="text/javascript"></script>
-        <script src="js/activity/activity.js" type="text/javascript"></script>
+        <script src="static/js/function/personalSalesReport.js" type="text/javascript"></script>
+        <script src="static/js/function/teamSalesReport.js" type="text/javascript"></script>
+        <script src="static/js/function/teamMemberSalesReport.js" type="text/javascript"></script>
+        <script src="static/js/function/property.js" type="text/javascript"></script>
+        <script src="static/js/function/client.js" type="text/javascript"></script>
+        <script src="static/js/function/activity.js" type="text/javascript"></script>
+        <script src="static/js/function/login.js" type="text/javascript"></script>
+        
+        <!--                                Converse css-->
+
+        <link rel="stylesheet" type="text/css" media="screen" href="static/js/converse/converse.css">
+        <script type="text/javascript" src="static/js/converse/components/otr/build/dep/salsa20.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/otr/build/dep/bigint.js"></script>
+        <!-- CryptoJS -->
+        <script type="text/javascript" src="static/js/converse/components/otr/vendor/cryptojs/core.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/otr/vendor/cryptojs/enc-base64.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/crypto-js-evanvosberg/src/md5.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/crypto-js-evanvosberg/src/evpkdf.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/otr/vendor/cryptojs/cipher-core.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/otr/vendor/cryptojs/aes.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/otr/vendor/cryptojs/sha1.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/otr/vendor/cryptojs/sha256.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/otr/vendor/cryptojs/hmac.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/otr/vendor/cryptojs/pad-nopadding.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/otr/vendor/cryptojs/mode-ctr.js"></script>
+        <!-- until here -->
+        <script type="text/javascript" src="static/js/converse/components/otr/build/dep/eventemitter.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/otr/build/otr.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/strophe/strophe.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/strophe.roster/index.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/strophe.muc/index.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/strophe.vcard/index.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/strophe.disco/index.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/underscore/underscore.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/backbone//backbone.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/backbone.localStorage/backbone.localStorage.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/tinysort/src/jquery.tinysort.js"></script>
+        <script type="text/javascript" src="static/js/converse/components/jed/jed.js"></script>
+        <script type="text/javascript" src="static/js/converse/locale/en/LC_MESSAGES/en.js"></script>
+        <script type="text/javascript" src="static/js/converse/converse.js"></script>
+        <!-- Panorama -->
+        <script src="static/js/panorama/jquery.transit.js"></script>
+        <script src="static/js/panorama/jquery.leanorama.js"></script>
+        <script src="static/js/panorama/jquery.leanorama.hotspot.js"></script>
+        <script src="static/js/panorama/jquery.leanorama.controlbar.js"></script>
+        <script src="static/js/panorama/jquery.leanorama.infobox.js"></script>
+
         <script>
-            $(function() {
+            $.ajax({
+                    url: 'Prebind',
+                    type: 'GET',
+                    success: function(data) {
+                        console.log(data);
+                            converse.initialize({
+                                auto_list_rooms: true,
+                                allow_muc: false,
+                                debug: true,
+                                bosh_service_url: 'http://14.199.25.192:7070/http-bind/', // Please use this connection manager only for testing purposes
+                                hide_muc_server: false,
+                                i18n: locales.en, // Resfer to ./locale/locales.js to see which locales are supported
+                                prebind: true,
+                                show_controlbox_by_default: true,
+                                xhr_user_search: false,
+                                jid: data.jid,
+                                sid: data.sid,
+                                rid: data.rid
+                            });
+                    },
+                    error:function(){
+                        converse.initialize({
+                            auto_list_rooms: false,
+                            auto_subscribe: false,
+                            bosh_service_url: 'https://bind.conversejs.org', // Please use this connection manager only for testing purposes
+                            hide_muc_server: false,
+                            i18n: locales.en, // Refer to ./locale/locales.js to see which locales are supported
+                            prebind: false,
+                            show_controlbox_by_default: true,
+                            xhr_user_search: false
+                        });
+                    }
+                });
+            $(function() { 
                 //init
                 Messenger.options = {
-                    extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-right',
+                    extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-left',
                     theme: 'future'
                 };
 
                 $("[data-toggle='offcanvas']").click();
-
-                var notiMsg;
-                notiMsg = Messenger().post({
-                    message: "You have 9 tasks uncomplete.",
-                    type: "info",
-                    actions: {
-                        open: {
-                            label: 'open',
-                            action: function() {
-                                $('#notification').click();
-                                notiMsg.cancel();
-                            }
-                        },
-                        cancel: {
-                            label: 'cancel',
-                            action: function() {
-                                return notiMsg.cancel();
-                            }
-                        }
-                    }
-                });
-
-                var msg;
-                msg = Messenger().post({
-                    message: "You have 5 messengers uncomplete.",
-                    type: "info",
-                    actions: {
-                        open: {
-                            label: 'open',
-                            action: function() {
-                                $('#msg').click();
-                                msg.cancel();
-                            }
-                        },
-                        cancel: {
-                            label: 'cancel',
-                            action: function() {
-                                return msg.cancel();
-                            }
-                        }
-                    }
-                });
 
                 Messenger().post({
                     message: "<h4>Welcome <%=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getFirstName()%>!</h4>",
@@ -249,41 +280,12 @@
                     openDialog($('#dialog_profile'), "Profile");
                 });
 
-                $('#open_calendar').click(function() {
-                    openDialog($('#dialog_calendar'), "Calenar");
-                    $('#calendar').fullCalendar('render');
-                });
                 $('#open_activity').click(function() {
                     openDialog($('#dialog_activity'), "Activity");
                 });
-                //typeahead
-                // instantiate the bloodhound suggestion engine
-                var numbers = new Bloodhound({
-                    datumTokenizer: function(d) {
-                        return Bloodhound.tokenizers.whitespace(d.num);
-                    },
-                    queryTokenizer: Bloodhound.tokenizers.whitespace,
-                    local: [
-                        {num: 'one'},
-                        {num: 'two'},
-                        {num: 'three'},
-                        {num: 'four'},
-                        {num: 'five'},
-                        {num: 'six'},
-                        {num: 'seven'},
-                        {num: 'eight'},
-                        {num: 'nine'},
-                        {num: 'ten'}
-                    ]
-                });
-
-                // initialize the bloodhound suggestion engine
-                numbers.initialize();
-
-                // instantiate the typeahead UI
-                $('#search').typeahead(null, {
-                    displayKey: 'num',
-                    source: numbers.ttAdapter()
+                
+                $('#actNoticeShowAll').on('click', function(){
+                    openDialog($('#dialog_activity'), "Activity");
                 });
             });
         </script>
@@ -313,219 +315,50 @@
                             </a>
                         </li>
                         <li>
+                            <a href="#" id='showPropertyList'>
+                                <i class="glyphicon glyphicon-eye-open"></i>
+                                <span>Property</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="#" id="open_activity">
                                 <i class="glyphicon glyphicon-calendar"></i>
                                 <span>Activity</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#" id="open_calendar">
-                                <i class="glyphicon glyphicon-calendar"></i>
-                                <span>Calendar</span>
-                            </a>
-                        </li>
-
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-file-text"></i>
+                                <i class="glyphicon glyphicon-stats"></i>
                                 <span>Report</span>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="#" id="personalSalesReport">Personal Sales Report</a></li>
-                                <li><a href="#" id="teamSalesReport">Team Sales Report</a></li>
-                                <li><a href="#" id="teamMemberSalesReport">Team Member Sales Report</a></li>
+                         <% String authHtml;
+                            if ((((Role) SecurityContextHolder.getContext().getAuthentication().getAuthorities().iterator().next()).getAuthority()).equalsIgnoreCase("ACCOUNT MANAGER"))
+                                authHtml = "<li><a href=\"#\" id=\"teamSalesReport\">Team Sales Report</a></li><li><a href=\"#\" id=\"teamMemberSalesReport\">Team Member Sales Report</a></li>";
+                            else
+                                authHtml = "";
+                         %>       
+                                <%= authHtml%>
+                                
                             </ul>
                         </li>
 
-                        <!-- Messages: style can be found in dropdown.less-->
-                        <li class="dropdown messages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="msg">
-                                <i class="fa fa-envelope"></i>
-                                <span class="label label-success">5</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 4 new messages</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li><!-- start message -->
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="img/avatar3.png" class="img-circle" alt="User Image"/>
-                                                </div>
-                                                <h4>
-                                                    Support Team
-                                                    <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li><!-- end message -->
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="img/avatar2.png" class="img-circle" alt="user image"/>
-                                                </div>
-                                                <h4>
-                                                    Design Team
-                                                    <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="img/avatar.png" class="img-circle" alt="user image"/>
-                                                </div>
-                                                <h4>
-                                                    Developers
-                                                    <small><i class="fa fa-clock-o"></i> Today</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="img/avatar2.png" class="img-circle" alt="user image"/>
-                                                </div>
-                                                <h4>
-                                                    Sales Department
-                                                    <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="img/avatar.png" class="img-circle" alt="user image"/>
-                                                </div>
-                                                <h4>
-                                                    Reviewers
-                                                    <small><i class="fa fa-clock-o"></i> 2 days</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">See All Messages</a></li>
-                            </ul>
-                        </li>
                         <!-- Notifications: style can be found in dropdown.less -->
-                        <li class="dropdown notifications-menu" >
+                        <li class="dropdown notifications-menu" id="actNoticeDropdownMenu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="notification">
-                                <i class="fa fa-warning"></i>
-                                <span class="label label-warning">10</span>
+                                <i id='actNoticeWarningIcon' class="fa fa-warning" ></i>
                             </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 10 notifications</li>
+                            <ul class="dropdown-menu">        
+                                <li id="actNoticeSentence" class="header">You have don't have any notification</li>
                                 <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li>
-                                            <a href="#">
-                                                <i class="ion ion-ios7-people info"></i> 5 new members joined today
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-warning danger"></i> Very long description here that may not fit into the page and may cause design problems
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-users warning"></i> 5 new members joined
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#">
-                                                <i class="ion ion-ios7-cart success"></i> 25 sales made
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="ion ion-ios7-person danger"></i> You changed your username
-                                            </a>
-                                        </li>
+                                    <ul id="actNoticeDetail" class="menu">
+                                        
                                     </ul>
-                                </li>
-                                <li class="footer"><a href="#">View all</a></li>
+                                </li>                            
                             </ul>
-                        </li>
-
-                        <!-- Tasks: style can be found in dropdown.less -->
-                        <li class="dropdown tasks-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-tasks"></i>
-                                <span class="label label-danger">9</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 9 tasks</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li><!-- Task item -->
-                                            <a href="#">
-                                                <h3>
-                                                    Design some buttons
-                                                    <small class="pull-right">20%</small>
-                                                </h3>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">20% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li><!-- end task item -->
-                                        <li><!-- Task item -->
-                                            <a href="#">
-                                                <h3>
-                                                    Create a nice theme
-                                                    <small class="pull-right">40%</small>
-                                                </h3>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">40% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li><!-- end task item -->
-                                        <li><!-- Task item -->
-                                            <a href="#">
-                                                <h3>
-                                                    Some task I need to do
-                                                    <small class="pull-right">60%</small>
-                                                </h3>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">60% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li><!-- end task item -->
-                                        <li><!-- Task item -->
-                                            <a href="#">
-                                                <h3>
-                                                    Make beautiful transitions
-                                                    <small class="pull-right">80%</small>
-                                                </h3>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">80% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li><!-- end task item -->
-                                    </ul>
-                                </li>
-                                <li class="footer">
-                                    <a href="#">View all tasks</a>
-                                </li>
-                            </ul>
+                    
                         </li>
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
@@ -536,16 +369,16 @@
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-black">
-                                    <img src="img/Jane.png" class="img-circle" alt="User Image" />
+                                    <img src="static/img/Jane.png" class="img-circle" alt="User Image" />
                                     <p>
-                                        <%=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getFirstName()%> - Developer
+                                        <%=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getFirstName()%>
                                         <small>Member since Nov. 2012</small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
                                 <li class="user-body">
                                     <div class="col-xs-12 text-center">
-                                        <a href="#">Sales</a>
+                                        <a href="#"><%=(((Role) SecurityContextHolder.getContext().getAuthentication().getAuthorities().iterator().next()).getAuthority())%></a>
                                     </div>
                                 </li>
                                 <!-- Menu Footer-->
@@ -571,7 +404,7 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="img/Jane.png" class="img-circle" alt="User Image" />
+                            <img src="static/img/Jane.png" class="img-circle" alt="User Image" />
                         </div>
 
                         <div class="pull-left info">
@@ -606,22 +439,44 @@
                     <!-- top row -->
                     <div class="row">
                         <div class="col-xs-12">
-                            <div id="container">Try to change your xml data to update this content</div>
-                            <script src="socket.io/socket.io.js"></script>
+                            <script src="static/socket.io/socket.io.js"></script>
                             <script>
             // creating a new websocket
-            var socket = io.connect('http://localhost:8000');
-            socket.on('connect', function() {
-                console.log("connected nodejs");
+            var counter = 0;
+            $('#actNoticeDropdownMenu').on('hidden.bs.dropdown', function () {
+                counter += $('#actNoticeDetail').children().length - counter;
+                $('#actNoticeSentence').html("You don't have have any notification");
+                $('#notification').html("<i id='actNoticeWarningIcon' class=\"fa fa-warning\" ></i>");
             });
+
+            var socket = io.connect('tyt06326.no-ip.org:8000');
+
+            socket.emit('connect', '<%=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getEmpId()%>');
             // on every message recived we print the new datas inside the #container div
             socket.on('notification', function(data) {
-                // convert the json string into a valid javascript object
+                          console.log(data);
+                $('#notification').html("<i id='actNoticeWarningIcon' class=\"fa fa-warning\" ></i><span id=\"actNoticeCounter\" class=\"label label-warning\">0</span>");
+                $('#actNoticeSentence').html("You have have " + ($('#actNoticeDetail').children().length - counter + 1) + " notifications");
+                $('#actNoticeDetail').prepend("<li><a href=\"#\"><i class=\"ion ion-ios7-people info\"></i>" +
+                            data['A_N_TITLE'] + "</a></li>");
+//                $('#actNoticeDetail').append("<li id=\"actNoticeShowAll\" class=\"footer\"><a href=\"#\">View all</a></li>");
+                                
+                $('#actNoticeCounter').html($('#actNoticeDetail').children().length - counter);
+                var actPusgMsg = Messenger().post({
+                    message: "You have an activity within 1 hour\n, '" + data['A_N_TITLE'] + "' \nat '" + data['START_DATE'] + "'",
+                    type: "info",
+                    actions: {
+                        open: {
+                            label: 'Got it!',
+                            action: function() {
+                                socket.emit('isRead', data['A_N_ID']);
+                                actPusgMsg.cancel();
+                            }
+                        }
+                    }
+                });
 
-                var _data = JSON.parse(data);
-                console.log(_data);
-                $('#container').html(_data.test.sample);
-                //$('time').html('Last Update:' + _data.time);
+   
             });
                             </script>
                         </div><!-- /.col -->
@@ -633,13 +488,15 @@
 
         <!-- add new dialog / event modal -->
 
+        <div id="conversejs" style="z-index: 999999"></div>
+
         <!-- Dialog -->
         <jsp:include page="personalSalesReport.jsp" />
         <jsp:include page="teamSalesReport.jsp" />
         <jsp:include page="teamMemberSalesReport.jsp"/>
-        <jsp:include page="calendar.jsp" />
         <jsp:include page="activity.jsp" />
         <jsp:include page="client.jsp" />
+        <jsp:include page="property.jsp" />
 
         <div id="dialog_profile" hidden="">
             <p>Hi , I am <%=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getFirstName()%></p>

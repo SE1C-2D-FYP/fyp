@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package com.crm.client;
 
@@ -17,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -43,8 +39,11 @@ public class ShowContactRecord extends HttpServlet {
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             String empId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getEmpId();
-            String sqlString = "SELECT contact_note.ct_date, contact_note.ct_time, contact_info.eng_name, contact_info.phone_num, contact_note.stock_id, contact_note.inch_price FROM contact_note, contact_info, client WHERE contact_note.emp_id = '" + empId + "' AND contact_note.ct_info_id = contact_info.ct_info_id AND contact_info.client_id = client.client_id AND client.client_id = " + request.getParameter("clientId") + " ORDER BY contact_note.ct_date DESC";
-            List result = session.createSQLQuery(sqlString).list();
+            Query query = session.createQuery("SELECT TO_CHAR(contactNote.ctDate, 'DD/MM/YYYY'), TO_CHAR(contactNote.ctDate, 'HH24:MI'), contactInfo.engName, contactInfo.phoneNum, contactNote.stockId.stockId, contactNote.ctType, contactNote.inchPrice, contactNote.memo FROM ContactNote AS contactNote, ContactInfo AS contactInfo, Client AS client WHERE contactNote.empId = :empId AND contactNote.ctInfoId = contactInfo.ctInfoId AND contactInfo.clientId = client.clientId AND client.clientId = :clientId ORDER BY contactNote.ctDate DESC");
+            query.setString("empId", empId);
+            query.setString("clientId", request.getParameter("clientId"));
+//            String sqlString = "SELECT TO_CHAR(contact_note.ct_date, 'DD/MM/YYYY'), TO_CHAR(contact_note.ct_date, 'HH24:MI'), contact_info.eng_name, contact_info.phone_num, contact_note.stock_id, contact_note.ct_type, contact_note.inch_price, contact_note.memo FROM contact_note, contact_info, client WHERE contact_note.emp_id = '" + empId + "' AND contact_note.ct_info_id = contact_info.ct_info_id AND contact_info.client_id = client.client_id AND client.client_id = " + request.getParameter("clientId") + " ORDER BY contact_note.ct_date DESC";
+            List result = query.list();
             DataTableObject dataTableObject = new DataTableObject();
             dataTableObject.setAaData(result);
             ObjectMapper mapper = new ObjectMapper();

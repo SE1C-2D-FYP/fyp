@@ -8,6 +8,7 @@ import com.crm.models.ActivityNote;
 import com.crm.models.CompanyClient;
 import com.crm.models.Employee;
 import com.crm.models.Title;
+import com.crm.security.User;
 import com.crm.util.HibernateUtil;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,6 +23,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -162,7 +164,7 @@ public class ActivityNoteDaoImpl {
     public List findByEmpId() {
 //        Language language =  (Language) session.get(Language.class, 1); 
 
-        Query query = session.getNamedQuery("Employee.findByEmpId").setString("empId", "H0000011");
+        Query query = session.getNamedQuery("Employee.findByEmpId").setString("empId", ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getEmpId());
 
         List<?> list = query.list();
 
@@ -170,7 +172,7 @@ public class ActivityNoteDaoImpl {
     }
 
     public Employee findEmp() {
-        String empId = "H0000011";
+        String empId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getEmpId();
         Session session = null;
         Employee emp = null;
         try {

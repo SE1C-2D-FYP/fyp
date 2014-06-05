@@ -22,8 +22,8 @@ $(function() {
                 //dialog
                 $('#dialog_salesReport_teamSalesReport').dialog({
                     "title": "Team Sales Report",
-                    width: 650,
-                    height: 550,
+                    width: 'auto',
+                    height: 600,
                     "buttons": {
                         "cancel": function() {
                             $(this).dialog("close");
@@ -116,7 +116,7 @@ $(function() {
                                 data.addRows(json);
                                 json_topUnitSales = json;
                                 var table = new google.visualization.Table(document.getElementById('salesReport_teamSalesReport_topUnitSales'));
-                                table.draw(data, {showRowNumber: true});
+                                table.draw(data, {width: 550, showRowNumber: true});
                             }, 'packages': ['table']});
                         
                         google.load('visualization', '1', {'callback': function() {
@@ -128,7 +128,7 @@ $(function() {
                                 data.addRows(json);
                                 json_agentPerformanceSales = json;
                                 var table = new google.visualization.Table(document.getElementById('salesReport_teamSalesReport_agentPerformanceSales'));
-                                table.draw(data, {showRowNumber: true});
+                                table.draw(data, {width: 550, showRowNumber: true});
                             }, 'packages': ['table']});
                         
                         google.load('visualization', '1', {'callback': function() {
@@ -140,7 +140,7 @@ $(function() {
                                 data.addRows(json);
                                 json_agentPerformanceUnit = json;
                                 var table = new google.visualization.Table(document.getElementById('salesReport_teamSalesReport_agentPerformanceUnit'));
-                                table.draw(data, {showRowNumber: true});
+                                table.draw(data, {width: 550, showRowNumber: true});
                             }, 'packages': ['table']});
                     }, // event
                     "beforeCollapse": function(evt, dlg) {

@@ -3,7 +3,7 @@
 </div> /.col -->
 
 <div id="list" hidden="">
-    <table cellpadding="9" cellspacing="9" border="0" id="listClient">
+    <table class="table-hover" cellpadding="9" cellspacing="9" border="0" id="listClient">
         <thead>
             <tr>
                 <th style="text-align: center;">Client ID</th>
@@ -169,13 +169,137 @@
     </form>
 </div><!-- /.box -->
 
-<div id="detail" hidden="">
-    <div id="client_tab_control">
+<div class="box box-primary" hidden="" id="insertTransactionInfoForm">
+    <div class="box-header">
+        <h3 class="box-title">New Transaction Form</h3>
+    </div><!-- /.box-header -->
+    <!-- form start -->
+    <form id="insertTransactionInfo">
+        <div class="box-body">
+            <div class="form-group">
+                <label>Date</label>
+                <input id="insertTransactionInfoForm_transactionDate" type="date" name="transactionDate" placeholder="Enter Date"/>
+            </div>
+            <div class="form-group">
+                <label>Address</label>
+                <div class="ui-widget">
+                    <label for="autocompleteTransactionAddressEstate">Estate: </label>
+                    <input id="autocompleteTransactionAddressEstate" name="transactionAddressEstate" placeholder="Enter Estate" />
+                    <input type="hidden" id="autocompleteTransactionAddressEstate_hidden" name="autocompleteTransactionAddressEstate_hidden" />
+                </div>
+                <div class="ui-widget">
+                    <label for="autocompleteTransactionAddressBlock">Block: </label>
+                    <input id="autocompleteTransactionAddressBlock" name="transactionAddressBlock" placeholder="Enter Block" />
+                    <input type="hidden" id="autocompleteTransactionAddressBlock_hidden" name="autocompleteTransactionAddressBlock_hidden" />
+                </div>
+                <div class="ui-widget">
+                    <label for="autocompleteTransactionAddressFloor">Floor: </label>
+                    <input id="autocompleteTransactionAddressFloor" name="transactionAddressFloor" placeholder="Enter Floor" />
+                    <input type="hidden" id="autocompleteTransactionAddressFloor_hidden" name="autocompleteTransactionAddressFloor_hidden" />
+                </div>
+                <div class="ui-widget">
+                    <label for="autocompleteTransactionAddressFlat">Flat: </label>
+                    <input id="autocompleteTransactionAddressFlat" name="transactionAddressFlat" placeholder="Enter Flat" />
+                    <input type="hidden" id="autocompleteTransactionAddressFlat_hidden" name="autocompleteTransactionAddressFlat_hidden" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Type</label>
+                <select class="boxsize" name="transactionType" id='insertTransactionInfoForm_transactionType'>
+                    <option value="sell">Sell</option>
+                    <option value="rent">Rent</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Price</label>
+                $<input type="text" class="form-control" id='insertTransactionInfoForm_transactionPrice' name="transactionPrice" placeholder="Enter Price" />
+            </div>
+            <div class="form-group">
+                <label>Commission</label>
+                $<input type="text" class="form-control" id='insertTransactionInfoForm_transactionCommission' name="transactionCommision" placeholder="Enter Commission" />
+            </div>
+        </div><!-- /.box-body -->
+
+        <div class="box-footer">
+            <button type="button" class="btn btn-primary" id="insertTransactionInfoForm_submit">Submit</button>
+            <button type="reset" class="btn btn-primary">Reset</button>
+        </div>
+    </form>
+</div><!-- /.box -->
+
+<div class="box box-primary" hidden="" id="insertContactRecordForm">
+    <div class="box-header">
+        <h3 class="box-title">New Contact Record Form</h3>
+    </div><!-- /.box-header -->
+    <!-- form start -->
+    <form id="insertContactRecord">
+        <div class="box-body">
+            <label>Date time</label>
+            <div class="form-group">
+                <input id="insertContactRecordForm_contactDate" type="datetime-local" name="date" />
+            </div>
+            <div class="form-group">
+                <label>Contact Person</label>
+                <div class="ui-widget">
+                    <select class="boxsize" name="contactPerson" id='insertContactRecordForm_contactPerson'>
+                        <option value="blank">----------</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Stock Number</label>
+                <div class="ui-widget">
+                    <input id="autocompleteContactRecordStock" name="stockNumber" placeholder="Enter stock number" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Type</label>
+                <select class="boxsize" name="type" id='insertContactRecordForm_type'>
+                    <option value="sell">Sell</option>
+                    <option value="rent">Rent</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Price</label>
+                $<input type="text" class="form-control" id='insertContactRecordForm_price' name="price" placeholder="Enter Price" />
+            </div>
+            <div class="form-group">
+                <label>Memo</label>
+                $<textarea class="form-control" id='insertContactRecordForm_memo' name="memo" placeholder="Enter Memo" ></textarea>
+            </div>
+        </div><!-- /.box-body -->
+
+        <div class="box-footer">
+            <button type="button" class="btn btn-primary" id="insertContactRecordForm_submit">Submit</button>
+            <button type="reset" class="btn btn-primary">Reset</button>
+        </div>
+    </form>
+</div><!-- /.box -->
+
+<div class="box box-primary" hidden="" id="transactionAgreementForm">
+    <div class="box box-warning"><h4 class="box-title">Upload</h4>
+        <div id="manageTransactionAgreement"></div>
     </div>
-    <div class="tab-content" id="clientDetail">
+    <div class="box box-warning"><h4 class="box-title">Agreement</h4>
+        <div id="pdf">
+
+        </div>
+    </div>
+    
+    <!-- form start -->
+</div><!-- /.box -->
+
+<div id="detail" hidden="">
+    <div class="pull-left" id="clientDetailContainer">
+    </div>
+    <div class="pull-left">
+        <div id="client_tab_control">
+        </div>
+        <div class="tab-content" id="clientDetail">
+        </div>
     </div>
 
     <div class="connectedSortable">
-        
+
     </div><!-- /.col -->
 </div>

@@ -12,10 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
@@ -41,7 +38,7 @@ public class ShowTransactionInfo extends HttpServlet {
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             String empId = ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getEmpId();
-            String sqlString = "SELECT TO_CHAR(transaction.trans_date, 'DD/MM/YYYY'), (estate.eng_name || ', ' || building.eng_name || ', ' || building.block_no || '' || unit.floor || '/F, Flat ' || unit.flat) AS unit_detail, unit.net_area, case when transaction.sell > 0 then 'sell' when transaction.rent > 0 then 'rent' end as transaction_type, case when transaction.sell > 0 then transaction.sell when transaction.rent > 0 then transaction.rent end as price, transaction.commission, transaction.agreement FROM estate, building, unit, employee, transaction WHERE transaction.emp_id = employee.emp_id AND transaction.emp_id = '" + empId + "' AND transaction.client_id = '" + request.getParameter("clientId") + "' AND unit.unit_id = transaction.unit_id AND unit.bldg_id = building.bldg_id AND building.est_id = estate.est_id ORDER BY transaction.trans_date DESC";
+            String sqlString = "SELECT TO_CHAR(transaction.trans_date, 'DD/MM/YYYY'), (estate.eng_name || ', ' || building.eng_name || ', ' || building.block_no || '' || unit.floor || '/F, Flat ' || unit.flat) AS unit_detail, unit.net_area, case when transaction.sell > 0 then 'sell' when transaction.rent > 0 then 'rent' end as transaction_type, case when transaction.sell > 0 then transaction.sell when transaction.rent > 0 then transaction.rent end as price, transaction.commission, transaction.agreement, transaction.tx_id FROM estate, building, unit, employee, transaction WHERE transaction.emp_id = employee.emp_id AND transaction.emp_id = '" + empId + "' AND transaction.client_id = '" + request.getParameter("clientId") + "' AND unit.unit_id = transaction.unit_id AND unit.bldg_id = building.bldg_id AND building.est_id = estate.est_id ORDER BY transaction.trans_date DESC";
             List result = session.createSQLQuery(sqlString).list();
             DataTableObject dataTableObject = new DataTableObject();
             dataTableObject.setAaData(result);

@@ -111,7 +111,7 @@ public class Estate implements Serializable {
     }
 
     @XmlTransient
-   
+    @JsonIgnore
     public Collection<Stock> getStockCollection() {
         return stockCollection;
     }
